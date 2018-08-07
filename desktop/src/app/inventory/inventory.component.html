@@ -1,0 +1,206 @@
+<app-sidenav></app-sidenav>
+<div class="container">
+  <h1>
+    <span class="title">
+      <b>Inventory</b>
+    </span>
+  </h1>
+
+  <mat-card class="searchbar row">
+
+    <div>
+      <span class="fa fa-search faStyle"></span>
+      <input class="txtcolor" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)">
+    </div>
+
+
+    <div class="pull-right">
+      <i class="filterName">Filter by</i>
+      <span>
+
+
+          <mat-form-field class="locationField">
+              <mat-select (change)="styleFilter()" placeholder="Style" multiple [formControl]="selectfilter">
+                <mat-option *ngFor="let style of filter_listOfInventorystyle" [value]="style">{{style}}</mat-option>
+              </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="ticketField">
+          <mat-select (change)="colorFilter()" placeholder="Color" multiple [formControl]="selectfilter">
+            <mat-option *ngFor="let inventcolor of filter_listOfInventorycolor" [value]="inventcolor">{{inventcolor}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="statusField">
+          <mat-select (change)="sizeFilter()" placeholder="Size" multiple [formControl]="selectfilter">
+            <mat-option *ngFor="let size of filter_listOfInventorysize" [value]="size">{{size}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <!-- <mat-form-field class="locationField">
+          <mat-select placeholder="Style" multiple (change)="filter()" [(ngModel)]='selectedLocation'> 
+            <mat-option *ngFor="let style of filter_listOfInventorystyle" [value]="style">{{style}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="ticketField">
+          <mat-select placeholder="Color" multiple (change)="filter()" [(ngModel)]='selectedLocation'>
+            <mat-option *ngFor="let inventcolor of filter_listOfInventorycolor" [value]="inventcolor">{{inventcolor}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="statusField">
+          <mat-select placeholder="Size" multiple (change)="filter()" [(ngModel)]='selectedLocation'>
+            <mat-option *ngFor="let size of filter_listOfInventorysize" [value]="size">{{size}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+      </span>
+
+    </div>
+  </mat-card>
+
+  <br>
+  <div class="ticket-container mat-elevation-z8 col-xs-12">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="style">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Style </mat-header-cell>
+        <mat-cell *matCellDef="let row"> 
+          <span *ngIf="row.StyleNumber != null">{{row.StyleNumber}}</span>
+          <span *ngIf="row.StyleNumber == null">-</span>
+         </mat-cell>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="style_desc">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Style Desc. </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{row.Description}}
+        </mat-cell>
+      </ng-container> -->
+
+
+      <ng-container matColumnDef="color">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>
+        <mat-cell *matCellDef="let row"> 
+          <span *ngIf="row.StyleColor != null">{{row.StyleColor}}</span>
+          <span *ngIf="row.StyleColor == null">-</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="size">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Size </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green">
+            <span *ngIf="row.GarmentSize != null">{{row.GarmentSize}}</span>
+            <span *ngIf="row.GarmentSize == null">-</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="style_option">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> StyleOption </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green"> 
+          <span *ngIf="row.StyleOption != null">{{row.StyleOption}}</span>
+          <span *ngIf="row.StyleOption == null">-</span> 
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="style_name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> StyleName </mat-header-cell>
+          <mat-cell *matCellDef="let row" [style.color]="green"> 
+            <span *ngIf="row.StyleName != null">{{row.StyleName}}</span>
+            <span *ngIf="row.StyleName == null">-</span> 
+          </mat-cell>
+        </ng-container>
+  
+
+
+      <ng-container matColumnDef="on_hand">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> On Hand </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green"> {{row.QuantityOnHand}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="allocated">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Allocated </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green">
+            <span *ngIf="row.Allocated != undefined">{{row.Allocated}}</span>
+            <span *ngIf="row.Allocated == undefined">-</span>  
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="available">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Available </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="blue"> 
+          <span *ngIf="row.AdjustedQuantityOnHand != null">{{row.AdjustedQuantityOnHand}}</span>
+          <span *ngIf="row.AdjustedQuantityOnHand == null">-</span> 
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="quarantined">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Quarantined </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="blue">
+            <span *ngIf="row.QuantitySeconds != null">{{row.QuantitySeconds}}</span>
+            <span *ngIf="row.QuantitySeconds == null">-</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="scrapped">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Scrapped </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="blue"> 
+            <span *ngIf="row.QuantityThirds != null">{{row.QuantityThirds}}</span>
+            <span *ngIf="row.QuantityThirds == null">-</span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column -->
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let detail" style="background-color: gainsboro;">
+          <div style="display:flex;vertical-align:middle">
+            <div style="padding:1%;width:100%">
+              <table cellspacing="10">
+                <tr class="header">
+                  <th>Transaction ID</th>
+                  <th>Style Number</th>
+                  <th>Color</th>
+                  <th>Size</th>
+                  <th>Adjustment Reason</th>
+                  <th>Adjustment Reason2</th>
+                  <th>Date</th>
+                  <th>Quantity</th>
+                </tr>
+                <tbody class=tablebody>
+                  <tr *ngFor='let items of inventoryitems'>
+                    <td class="content">{{items.TransactionID}}</td>
+                    <td>{{items.StyleNumber}}</td>
+                    <td>{{items.StyleColor}}</td>
+                    <td>{{items.GarmentSize}}</td>
+                    <td>{{items.TransactionReasonCode}}</td>
+                    <td>{{items.TransactionReasonCode2}}</td>
+                    <td>{{items.DataExportDate | date:'MM/dd/yyyy' }}</td>
+                    <td>{{items.Quantity}}</td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" (click)="Onclick(row)" [class.expanded]="expandedElement == row"
+        (click)="expandedElement = row">
+      </mat-row>
+      <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow" [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+        style="overflow: hidden">
+      </mat-row>
+    </mat-table>
+
+  <mat-paginator class="custom-page" #paginator [length]="length" [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true">
+   </mat-paginator>
+  </div>
+
+</div>

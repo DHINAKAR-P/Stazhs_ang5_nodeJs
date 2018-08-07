@@ -1,0 +1,149 @@
+<app-sidenav></app-sidenav>
+<div class="container">
+  <h1>
+    <span class="title">
+      <b>Shipments Summary</b>
+    </span>
+  </h1>
+  <mat-card class="searchbar">
+    <!-- <div class="row"> -->
+    <!-- <div class="icon"> -->
+    <!-- </div> -->
+    <div>
+      <span class="fa fa-search faStyle"></span>
+      <input class="txtcolor" type="search" placeholder="Search" (keyup)="applyFilter($event.target.value)">
+    </div>
+
+    <div class="pull-right">
+      <!-- <div class="col-lg-1 filter"> -->
+      <i class="filterName">Filter By</i>
+      <!-- </div> -->
+      <!-- <span> -->
+      <!-- <div class="col-lg-2 col-lg-offset-2"> -->
+      <span>
+        <mat-form-field class="locationField">
+          <mat-select placeholder="PO#" multiple [formControl]="selectfilter" (change)="PONumberFilter()">
+            <mat-option *ngFor="let PONumber of filter_PONumber" [value]="PONumber">{{PONumber}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- </div> -->
+        <!-- <div class="col-lg-2 col-lg-offset-2"> -->
+        <!-- <mat-form-field class="ticketField">
+          <mat-select placeholder="Customer" multiple [formControl]="selectfilter" (change)="CustomerFilter()">
+              <mat-option *ngFor="let Customer of filter_Customer" [value]="Customer">{{Customer}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <mat-form-field color="accent" class="dateForm">
+            <mat-label>Start Date</mat-label>
+            <input matInput [min]="startDateMin" [max]="startDateMax"  (dateInput)="startDataInput()" [(ngModel)]="startDate" [matDatepicker]="picker1">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker (selectedChanged)="startDateCalcs($event)" #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field color="accent" class="dateForm">
+              <mat-label>End Date</mat-label>
+              <input matInput [min]="endDateMin" [max]="endDateMax" [matDatepicker]="picker2" (dateInput)="endDataInput()" [(ngModel)]="endDate" [disabled]="endDateDisable">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker (selectedChanged)="endDateCalcs($event)" #picker2></mat-datepicker>
+            </mat-form-field>
+            
+        <!-- </div> -->
+        <!-- <div class="col-lg-2 col-lg-offset-2"> -->
+        <!-- <mat-form-field class="statusField">
+          <mat-select placeholder="Style" multiple [formControl]="selectfilter" (change)="StyleFilter()">
+            <mat-option *ngFor="let Style of filter_Style" [value]="Style">{{Style}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <!-- </div> -->
+      </span>
+    </div>
+    <!-- </span> -->
+    <!-- </div> -->
+    <!-- </div> -->
+  </mat-card>
+  <br>
+  <div class="ticket-container mat-elevation-z8 col-xs-12">
+    <mat-table [dataSource]="dataSource" matSort matSortActive="PONumber" matSortDirection="desc" matSortDisableClear>
+
+        <ng-container matColumnDef="PONumber">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> PO# </mat-header-cell>
+            <mat-cell *matCellDef="let row" style="color: blue;cursor: pointer">
+            <p *ngIf="row.PONumber!=null || row.PONumber!=''">{{row.PONumber}}</p>
+            <p *ngIf="row.PONumber==null || row.PONumber==''">-</p>
+            </mat-cell>
+        </ng-container>
+      <ng-container matColumnDef="ShipToName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ship To Name </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf="row.ShipToName != null">{{row.ShipToName}} </span>
+          <span *ngIf="row.ShipToName == null">-</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ShipCity">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Ship City </mat-header-cell>
+          <!-- <mat-cell *matCellDef="let row">{{row.CustomerID}}</mat-cell> -->
+          <mat-cell *matCellDef="let row">-</mat-cell>
+          
+        </ng-container>
+
+        <ng-container matColumnDef="State">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+              <span *ngIf="row.StatusName != null">{{row.StatusName}} </span>
+              <span *ngIf="row.StatusName == null">-</span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Waybill">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Waybill </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+              <span *ngIf="row.WayBill != null">{{row.WayBill}} </span>
+              <span *ngIf="row.WayBill == null">- </span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ShipDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Ship Date </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+              <span *ngIf="row.ShipDate != null">{{row.ShipDate | date:'MM/dd/yyyy'}} </span>
+              <span *ngIf="row.ShipDate == null">-</span>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ShipMethod">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Ship Method </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+              <span *ngIf="row.ShipperNumber != null">{{row.ShipperNumber}} </span>
+              <span *ngIf="row.ShipperNumber == null">-</span>
+          </mat-cell>
+        </ng-container>
+       
+        <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+          <mat-cell *matCellDef="let row" [style.color]="blue">
+            <p *ngIf="row.CompanyCode!=null || row.CompanyCode!=''">{{row.CompanyCode}}</p>
+            <p *ngIf="row.CompanyCode==null || row.CompanyCode==''">-</p>
+          </mat-cell>
+        </ng-container>
+
+      <!-- <ng-container matColumnDef="item">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Item </mat-header-cell>
+        <mat-cell *matCellDef="let row" style="cursor: pointer;" matTooltip="TFWJS- ATHLETICS JACKET">
+          {{row.ShipmentID}}
+        </mat-cell>
+      </ng-container> -->
+
+      <!-- <ng-container matColumnDef="Style">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Style </mat-header-cell>
+          <mat-cell *matCellDef="let row" style="cursor: pointer;"> 
+            <span *ngFor = "let item of row.ShipmentsItems">
+            <p *ngIf="item?.StyleNumber!=null || item?.StyleNumber!=''">{{item?.StyleNumber}}</p>&nbsp;
+            <p *ngIf="item?.StyleNumber==null || item?.StyleNumber==''">-</p> 
+            </span>
+          </mat-cell>
+        </ng-container> -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row (click)="onRowSelected(row)" *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>

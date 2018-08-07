@@ -1,0 +1,145 @@
+table.dataTable thead th{
+    border-bottom: 0px;
+    background-color: #bebdbd;
+}
+table.dataTable.no-footer {
+    border-bottom: 0px;
+}
+.txtcolor{
+  color: rgb(127, 140, 141);
+  font-weight: 100;
+  border: none;
+  margin-top: 2%;
+  margin-left: 1%;
+  width: 40%;
+}
+
+
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .badge{
+    border-radius: unset;
+    width: 70%;
+  }
+  
+  .searchbar{
+    height: 10%;
+    width: 100%;
+    border-radius: 1px;
+    /* border-color: black; */
+    /* border-style: solid; */
+    border-width: 1px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: 0%;
+}
+
+.searchbox{
+  margin-bottom: -4%;
+  margin-left: 2%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 'regular';
+  font-size: 18px;
+  color:#ccc;
+}
+.faStyle{
+  color: rgb(127, 140, 141);
+}
+.pull-right {
+  margin-left: 52%; margin-top: -4%;
+}
+.filterName {
+  margin-right: 10px
+}
+.CreatedByField {
+  width: 7em;
+}
+.assignedToField{
+  width: 7em;
+}
+.statusField{
+  width: 5em;
+}
+.btn{
+  margin-left: 88%;
+  display:inline-block;
+  min-width: 50px;  
+   max-width: 300px;
+}
+
+.mat-table{
+  overflow-y: hidden;
+}
+
+.rowUUID {
+color: blue;
+cursor: pointer;
+}
+.inputtext {
+  width:100%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.searchlabel{
+  margin-bottom: -0.5rem;
+}
+@media only screen and (max-width: 800px) and (min-width: 375px) {
+  .btn{
+    margin-left: 68%;
+  } 
+  .pull-right {
+    margin-left: 5%;
+    margin-top: 0%;
+}  
+}
+
+@media only screen and (width: 1024px) {
+  .btn{
+    margin-left: 85%;
+  }
+  .pull-right {
+    margin-left: 51%;
+    margin-top: -4%;
+}   
+}
+
+@media only screen and (width: 768px) {
+  .btn{
+    margin-left: 81%;
+  }
+  .pull-right {
+    margin-left: 39%;
+    margin-top: -7%;
+}   
+}
+
+@media only screen and (max-width: 375px) {
+  .btn{
+    margin-left: 63%;
+  } 
+  .pull-right {
+    margin-left: 15%;
+    margin-top: 2%;
+}  
+.searchTicketDiv {
+  margin-left: 8%;
+}
+}
+@media only screen and (max-width: 522px) {
+  .description-drop {
+    width:330px;
+  }
+}
+.description-drop {
+  position: absolute;
+  background: white;
+  width: 475px; 
+  z-index: 999;
+  padding: 20px;
+  border: 1px solid grey;
+}

@@ -1,0 +1,2716 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Stahls Application API",
+        "description": "Stahls Application API",
+        "license": {
+            "name": "Geppetto",
+            "url": "https://www.geppettosoftware.com/"
+        }
+    },
+    "host": "stahlsportaltest.azurewebsites.net",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Authorization": {
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
+        }
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new User under Organisation",
+                        "schema": {
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "summary": "Create new User under Organisation",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/User/create": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new User under Organisation",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                ],
+                "summary": "Create new User under Organisation",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/User/getall/": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all Users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/User/update": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user information",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Update user information",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Users updated",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/User/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter user UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/User/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter user UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete user by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Inventory/create": {
+            "post": {
+                "tags": [
+                    "Inventories"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Inventory",
+                        "schema": {
+                            "$ref": "#/definitions/Inventories"
+                        }
+                    }
+                ],
+                "summary": "Create new Inventory",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Inventory/getall/": {
+            "get": {
+                "tags": [
+                    "Inventories"
+                ],
+                "summary": "Get all Inventories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Inventories"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Inventory/update": {
+            "put": {
+                "tags": [
+                    "Inventories"
+                ],
+                "summary": "Update Inventory information",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update Inventory information",
+                        "schema": {
+                            "$ref": "#/definitions/Inventories"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Inventory updated",
+                        "schema": {
+                            "$ref": "#/definitions/Inventories"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Inventory/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter user UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Inventories"
+                ],
+                "summary": "Get Inventory by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Inventories"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Inventory/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Inventory UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Inventories"
+                ],
+                "summary": "Delete Inventory by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Inventories"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/User/getuserByrole/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Role UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by User Role",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/User/getuserByreport/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Report UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by Report",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/User/getuserByOrganization/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Organisation UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by Organisation",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/User/getUserByGroup/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Group UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by Group",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/create": {
+            "post": {
+                "tags": [
+                    "Ticket"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Ticket",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                ],
+                "summary": "Create new Ticket",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/getall/": {
+            "get": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Get all Ticket",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/update": {
+            "put": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Update Ticket information",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Update Ticket information",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ticket updated",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Ticket UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Get Ticket by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Ticket UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Delete Ticket by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/search/{assignTo}/{status}": {
+            "parameters": [
+                {
+                    "name": "assignTo",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter assigned user of the Ticket",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                {
+                    "name": "status",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter status of the Ticket",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Get Ticket by Status and Assigned to User",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/getbyuser/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter user UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Get Ticket by User",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/getbystatus/{status}": {
+            "parameters": [
+                {
+                    "name": "status",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Ticket status",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Get Ticket by status",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Ticket/getbyassignto/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter user UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Ticket"
+                ],
+                "summary": "Get Ticket by Assied User",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Organization/create": {
+            "post": {
+                "tags": [
+                    "Organization"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Organization",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                ],
+                "summary": "Create new Organization",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Organization/getall/": {
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Get all Organization",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Organization/update": {
+            "put": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Update Organization information",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Update Organization information",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Organization updated",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Organization/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Organization UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Get Organization by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Organization/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Organization UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Delete Organization by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Group/create": {
+            "post": {
+                "tags": [
+                    "Group"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Group",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                ],
+                "summary": "Create new Group",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Group/getall/": {
+            "get": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Get all Group",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Group/update": {
+            "put": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Update Group information",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Update Group information",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Users updated",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Group/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Group UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Get Group by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Group/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Group UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Delete Group by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Group/getgroupByreport/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Report UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Get Group by Report",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Group/getGroupByOrganization/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Organisation UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "Get Group by Organisation",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/GroupUsers/create": {
+            "post": {
+                "tags": [
+                    "GroupUsers"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Group of Users",
+                        "schema": {
+                            "$ref": "#/definitions/GroupUsers"
+                        }
+                    }
+                ],
+                "summary": "Create new Group of Users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GroupUsers"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/GroupUsers/getall/": {
+            "get": {
+                "tags": [
+                    "GroupUsers"
+                ],
+                "summary": "Get all Group of Users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GroupUsers"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/GroupUsers/update": {
+            "put": {
+                "tags": [
+                    "GroupUsers"
+                ],
+                "summary": "Update Users Group",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Update Users Group",
+                        "schema": {
+                            "$ref": "#/definitions/GroupUsers"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Users Group updated",
+                        "schema": {
+                            "$ref": "#/definitions/GroupUsers"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/GroupUsers/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter user group UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "GroupUsers"
+                ],
+                "summary": "Get Group of Users by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GroupUsers"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/GroupUsers/delete/{userid}/{groupid}": {
+            "parameters": [
+                {
+                    "name": "userid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter user UUID",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                {
+                    "name": "groupid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Group UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "GroupUsers"
+                ],
+                "summary": "Delete Users from the Group",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GroupUsers"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/create": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Report",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                ],
+                "summary": "Create new Report",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/getall/": {
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "Get all Report",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/update": {
+            "put": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "Update Report information",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Update Report information",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Report updated",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Report UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "Get Report by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Report UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "Delete Report by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/getReportByUser/{userid}": {
+            "parameters": [
+                {
+                    "name": "userid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter user UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "Get Report by User",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/getReportByOrganization/{organizationid}": {
+            "parameters": [
+                {
+                    "name": "status",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Organization uuid",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "Get Report by Organization",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/assign_user": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Assign user to Report",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                ],
+                "summary": "Assign user to Report",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/remove_user": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Remove user from Report",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                ],
+                "summary": "Remove user from Report",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/assing_group": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Assign Report to groups",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                ],
+                "summary": "Assign Report to groups",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Report/remove_group": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Remove Report from groups",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                ],
+                "summary": "Remove Report from groups",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Authorities/create": {
+            "post": {
+                "tags": [
+                    "Authorities"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Authorities",
+                        "schema": {
+                            "$ref": "#/definitions/Authorities"
+                        }
+                    }
+                ],
+                "summary": "Create new Authorities",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Authorities"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Authorities/getall/": {
+            "get": {
+                "tags": [
+                    "Authorities"
+                ],
+                "summary": "Get all Authorities",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Authorities"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Authorities/update": {
+            "put": {
+                "tags": [
+                    "Authorities"
+                ],
+                "summary": "Update Authorities information",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Update Authorities information",
+                        "schema": {
+                            "$ref": "#/definitions/Authorities"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Authorities updated",
+                        "schema": {
+                            "$ref": "#/definitions/Authorities"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Authorities/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Authorities UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Authorities"
+                ],
+                "summary": "Get Authorities by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Authorities"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Authorities/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Authorities UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Authorities"
+                ],
+                "summary": "Delete Authorities by uuid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Authorities"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Order/create": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Orders",
+                        "schema": {
+                            "$ref": "#/definitions/Orders"
+                        }
+                    }
+                ],
+                "summary": "Create new Orders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Orders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Order/getall": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get All Orders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Orders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Order/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter Orders UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get Orders By UUID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Orders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Order/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter the Order UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Delete Orders by UUID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Orders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Order/update": {
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update Orders",
+                        "schema": {
+                            "$ref": "#/definitions/Orders"
+                        }
+                    }
+                ],
+                "summary": "Update Order Details",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Orders Updated",
+                        "schema": {
+                            "$ref": "#/definitions/Orders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/OrderItem/create": {
+            "post": {
+                "tags": [
+                    "Order Item"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create new Order Item",
+                        "schema": {
+                            "$ref": "#/definitions/OrderItem"
+                        }
+                    }
+                ],
+                "summary": "Create new Order Item",
+                "responses": {
+                    "200": {
+                        "description": "Order Item Created",
+                        "schema": {
+                            "$ref": "#/definitions/OrderItem"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/OrderItem/getall": {
+            "get": {
+                "tags": [
+                    "Order Item"
+                ],
+                "summary": "Get all Order Item",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrderItem"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/OrderItem/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter UUID for Order Item",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Order Item"
+                ],
+                "summary": "Get Order Item by UUID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrderItem"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/OrderItem/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter the Order UUID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Order Item"
+                ],
+                "summary": "Delete Order Item by UUID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrderItem"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/OrderItem/update": {
+            "put": {
+                "tags": [
+                    "Order Item"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update Order Item",
+                        "schema": {
+                            "$ref": "#/definitions/OrderItem"
+                        }
+                    }
+                ],
+                "summary": "Update Order Item",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrderItem"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/file/upload/{uuid}": {
+            "post": {
+                "tags": [
+                    "Ticket Attachment"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create File Upload",
+                        "schema": {
+                            "$ref": "#/definitions/TicketAttachment"
+                        }
+                    }
+                ],
+                "summary": "Create File Upload",
+                "responses": {
+                    "200": {
+                        "description": "Create File Upload",
+                        "schema": {
+                            "$ref": "#/definitions/TicketAttachment"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/file/getall": {
+            "get": {
+                "tags": [
+                    "Ticket Attachment"
+                ],
+                "summary": "Get File Upload",
+                "responses": {
+                    "200": {
+                        "description": "Get File Upload",
+                        "schema": {
+                            "$ref": "#/definitions/TicketAttachment"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/file/getbyid/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter UUID for Ticket Attachment",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Ticket Attachment"
+                ],
+                "summary": "Get File by UUID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TicketAttachment"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/file/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter UUID for Ticket Attachment",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Ticket Attachment"
+                ],
+                "summary": "Delete File by UUID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TicketAttachment"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Chat/create": {
+            "post": {
+                "tags": [
+                    "Chat"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create Chat",
+                        "schema": {
+                            "$ref": "#/definitions/Chat"
+                        }
+                    }
+                ],
+                "summary": "Create Chat",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Chat"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/Chat/getbyticketid/{ticketid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter UUID for Chat",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": " Get by Ticket Id",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Chat"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/PurchaseOrders/create": {
+            "post": {
+                "tags": [
+                    "Purchase Orders"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create Purchase Orders",
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrders"
+                        }
+                    }
+                ],
+                "summary": "Create Purchase Orders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/PurchaseOrders/getall": {
+            "get": {
+                "tags": [
+                    "Purchase Orders"
+                ],
+                "summary": "Get Purchase Order List",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/PurchaseOrders/get/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter UUID for Purchase Orders",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Purchase Orders"
+                ],
+                "summary": "Get Purchase Order By UUID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/PurchaseOrders/update": {
+            "put": {
+                "tags": [
+                    "Purchase Orders"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update Purchase Orders",
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrders"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Update Purchase Orders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/api/PurchaseOrders/delete/{uuid}": {
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "description": "Enter UUID for Purchase Orders",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Purchase Orders"
+                ],
+                "summary": "Delete Purchase Order by UUID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrders"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Authorities": {
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "role": {
+                    "type": "string"
+                }
+            }
+        },
+        "Group": {
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "groupname": {
+                    "type": "string"
+                }
+            }
+        },
+        "GroupUsers": {
+            "properties": {
+                "GroupUuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "UserUuid": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        },
+        "Report": {
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "reportname": {
+                    "type": "string"
+                }
+            }
+        },
+        "Users": {
+            "required": [
+                "username",
+                "email"
+            ],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "username": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "Authorities": {
+                    "$ref": "#/definitions/Authorities"
+                },
+                "organizationUuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "Ticket": {
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "date": {
+                    "type": "string",
+                    "allowNull": false,
+                    "example": "1995-09-07T10:40:52Z",
+                    "format": "date-time"
+
+                },
+                "type": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "$ref": "#/definitions/Users"
+                    }
+                },
+                "orders": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "$ref": "#/definitions/Orders"
+                    }
+                }
+            }
+        },
+        "Organization": {
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "organizationname": {
+                    "type": "string"
+                }
+            }
+        },
+        "Inventories": {
+            "required": [],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "style": {
+                    "type": "string"
+                },
+                "style_desc": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "string"
+                },
+                "on_hand": {
+                    "type": "number"
+                },
+                "allocated": {
+                    "type": "number"
+                },
+                "quarantined": {
+                    "type": "number"
+                },
+                "scrapped": {
+                    "type": "number"
+                },
+                "available": {
+                    "type": "number"
+                }
+            }
+        },
+        "Orders": {
+            "required": [],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "location": {
+                    "type": "string"
+                },
+                "po": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string",
+                    "allowNull": false,
+                    "example": "1995-09-07T10:40:52Z",
+                    "format": "date-time"
+                },
+                "requested": {
+                    "type": "string",
+                    "example": "1995-09-07T10:40:52Z",
+                    "format": "date-time"
+                },
+                "forcasted": {
+                    "type": "string",
+                    "example": "1995-09-07T10:40:52Z",
+                    "format": "date-time"
+                },
+                "tickets": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "Tickets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "$ref": "#/definitions/Ticket"
+                    }
+                }
+            }
+        },
+        "OrderItem": {
+            "required": [],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "item": {
+                    "type": "integer"
+                },
+                "style": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "shippingmethod": {
+                    "type": "string"
+                },
+                "artworkstatus": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "shippinginfo": {
+                    "type": "string"
+                },
+                "Order": {
+                    "$ref": "#/definitions/Orders"
+                }
+            }
+        },
+        "TicketAttachment": {
+            "required": [],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "attachmenturl": {
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "Tickets":{
+                    "$ref":"#/definitions/Ticket"
+                }
+            }
+        },
+        "Chat": {
+            "required": [],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "request": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "escalate": {
+                    "type": "string"
+                },
+                "createdTime": {
+                    "type": "string",
+                    "allowNull": false,
+                    "format": "date-time",
+                    "example": "1995-09-07T10:40:52Z"
+                }
+            }
+        },
+        "PurchaseOrders": {
+            "required": [],
+            "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "uniqueItems": true
+                },
+                "loc": {
+                    "type": "string"
+                },
+                "customer": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string",
+                    "allowNull": false,
+                    "format": "date-time",
+                    "example": "1995-09-07T10:40:52Z"
+                },
+                "orderstatus": {
+                    "type": "string"
+                },
+                "tickets": {
+                    "type": "integer"
+                },
+                "forcastedArrival": {
+                    "type": "integer"
+                },
+                "arrivalDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "1995-09-07T10:40:52Z",
+                    "allowNull": true
+                }
+            }
+        }
+    }
+}

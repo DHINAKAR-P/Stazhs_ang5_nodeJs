@@ -1,0 +1,275 @@
+<section>
+  <mat-card style="min-height: 50%;">
+    <mat-card-content>
+      <h2 class="example-h2">Ticket Details</h2>
+      <mat-tab-group class="demo-tab-group">
+        <mat-tab label="Ticket Details">
+          <div class="demo-tab-content">
+            <br>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+                <label>ID </label>
+              </div>
+              <div class="col-offset-2">
+              </div>
+              <div class="col-lg-4">
+                <label>:{{ticket.uuid}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2">
+                <label>Ticket Subject </label>
+              </div>
+              <div class="col-offset-2">
+              </div>
+              <div class="col-lg-2">
+                <label>:{{ticket.subject}} </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2">
+                <label>Ticket Description </label>
+              </div>
+              <div class="col-offset-2">
+              </div>
+              <div class="col-lg-8">
+                <label>:{{ticket.description}} </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2">
+                <label>Severity</label>
+              </div>
+              <div class="col-offset-2">
+              </div>
+              <div class="col-lg-2">
+                <label>:{{ticket.severity}} </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2">
+                <label>Priority</label>
+              </div>
+              <div class="col-offset-2">
+              </div>
+              <div class="col-lg-2">
+                <label>:{{ticket.priority}}</label>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="User Details">
+          <div class="demo-tab-content">
+            <br>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+                <label>Username</label>
+              </div>
+              <div class="col-offset-2">
+              </div>
+              <div class="col-lg-2">
+                <label>:{{ticket.user?.username}} </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2">
+                <label>E-Mail</label>
+              </div>
+              <div class="col-offset-2">
+              </div>
+              <div class="col-lg-2">
+                <label>:{{ticket.user?.email}}</label>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- <mat-tab label="Chat History">
+          <ol *ngFor="let chat of ListofChats ">
+            <li>{{chat.request}}</li>
+          </ol>
+          <input type="text" (keyup.enter)="saveChatData(chat)" [(ngModel)]="chat" />
+          <button type="submit" (click)="saveChatData(chat)">submit</button>
+        </mat-tab> -->
+        <mat-tab label="Ticket History">
+          <div class="col-sm-12 frame">
+            <ul>
+              <li *ngFor="let chat of ListofChats | sortgrid: 'createdTime'" style="width:100%">
+                <br>
+                <div *ngIf="chat.status">
+                  <div class="line">
+                    <div class="centerText">{{chat.status}} by {{chat.user.firstname}} {{chat.user.lastname}}
+                      <div> At {{chat.createdTime | date: 'dd MMM, H:mm'}}</div>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+                </div>
+                <!-- ticket escalated -->
+
+                <div *ngIf="chat.escalate == 'yes'">
+                  <div class="line">
+                    <div class="centerText"> Ticket is escalated by {{chat.user.firstname}} {{chat.user.lastname}}
+                      <div> At {{chat.createdTime | date: 'dd MMM, H:mm'}}</div>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+                </div>
+                <!-- assignedTo -->
+                <div *ngIf="chat.assignto">
+                  <div class="line">
+                    <div class="centerText">Ticket assigned to {{chat.assignto.firstname}} {{chat.assignto.lastname}}
+                      <div> At {{chat.createdTime | date: 'dd MMM, H:mm'}} {{chat.UserUuid == currentUser.user.uuid}}</div>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+                </div>
+                <br>
+                <div *ngIf="chat.UserUuid != currentUser.user.uuid && chat.request != null">
+                  <div class="msj macro">
+                    <!-- <div class="avatar">
+                    <img class="img-circle" style="width:100%;" src="'+ me.avatar +'" />
+                  </div> -->
+                    <div class="text text-l">
+                      <p>{{chat.request}}</p>
+                      <br>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="macro">
+                    <!-- <div class="avatar">
+                    <img class="img-circle" style="width:100%;" src="'+ me.avatar +'" />
+                  </div> -->
+                    <div class="text text-l">
+                      <p>{{chat.user.firstname}} {{chat.user.lastname}} &bull; {{chat.createdTime | date: 'dd MMM, H:mm'}}</p>
+                    </div>
+                  </div>
+
+                  <!-- <div class="">{{chat.user.firstname}} {{chat.user.lastname}}</div> -->
+                </div>
+                <div *ngIf="chat.UserUuid == currentUser.user.uuid && chat.request != null">
+                  <div class="msj-rta macro">
+                    <div class="text text-r">
+                      <p>{{chat.request}}</p>
+                      <br>
+                    </div>
+                    <!-- <div class="avatar">
+                    <img class="img-circle" style="width:100%;" src="'+ me.avatar +'" />
+                  </div> -->
+                    <!-- <div class="row">{{chat.user.firstname}} {{chat.user.lastname}}</div> -->
+                  </div>
+                  <br>
+                  <br>
+                  <div class="macro" style="float:  right;">
+                    <!-- <div class="avatar">
+                    <img class="img-circle" style="width:100%;" src="'+ me.avatar +'" />
+                  </div> -->
+                    <div class="text text-r">
+                      <p>{{chat.user.firstname}} {{chat.user.lastname}} &bull; {{chat.createdTime | date: 'dd MMM, H:mm'}}</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+            <div>
+              <div class="msj-rta macro" style="width: 100%">
+                <div class="text text-r" style="background:whitesmoke !important">
+                  <input class="mytext" (keyup.enter)="saveChatData(chat)" [(ngModel)]="chat" placeholder="Type a message" />
+                </div>
+              </div>
+
+              <div style="padding:10px;">
+                <input class="glyphicon glyphicon-file" type="file" id="upload" style="position:absolute; visibility:hidden" />
+              </div>
+              <div style="padding:10px;">
+                <span class="glyphicon glyphicon-share-alt" (click)="saveChatData(chat)"></span>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+
+        <!-- <mat-tab label="Ticket History">
+          <div class="demo-tab-content">
+            Need To Work
+          </div>
+        </mat-tab> -->
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+  <div class="container">
+    <div style="text-align:center;">
+      <button mat-raised-button color="primary" data-toggle="modal" data-target="#openButtonModal" [disabled]="hideReopenButton"
+        (click)="modalRO()">ReOpen</button>
+      <button mat-raised-button color="primary" [disabled]="hideCloseButton" (click)="modalCT()">Close</button>
+      <button mat-raised-button color="primary" [disabled]="hideEscalate" (click)="modalEscalate()">Escalated</button>
+      <button mat-raised-button color="primary" data-toggle="modal" data-target="#exampleModal" (click)="modalReassigned()">Reassigned</button>
+      <button mat-raised-button color="warn" (click)="cancelTicket()">Cancel</button>
+    </div>
+  </div>
+
+</section>
+
+<modal #reopenticket>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Conformation</h4>
+  </modal-header>
+  <modal-body>
+    <span>Are you want to Re-open now!</span>
+  </modal-body>
+  <modal-footer>
+    <button mat-raised-button color="primary" color="primary" (click)="ReOpenTickets()">Yes</button>
+    <button mat-raised-button color="warn" data-dismiss="modal" (click)="reopenticket.dismiss()">Cancel</button>
+  </modal-footer>
+</modal>
+<modal #closeticket>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Conformation</h4>
+  </modal-header>
+  <modal-body>
+    <span>Are you want to close!</span>
+  </modal-body>
+  <modal-footer>
+    <button mat-raised-button color="warn" data-dismiss="modal" (click)="closeticket.dismiss()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="closeTicket()">Yes</button>
+  </modal-footer>
+</modal>
+<modal #escalate>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Conformation</h4>
+  </modal-header>
+  <modal-body>
+    <span>Are you want to escalate!</span>
+  </modal-body>
+  <modal-footer>
+    <button mat-raised-button color="warn" data-dismiss="modal" (click)="escalate.dismiss()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="escalateTicket()">Yes</button>
+  </modal-footer>
+</modal>
+<modal #reassignedticket>
+  <modal-header [show-close]="true">
+    <h4>Conformation</h4>
+  </modal-header>
+  <modal-body>
+    <mat-form-field>
+      <mat-select matInput placeholder="Select Option" [(ngModel)]="selecteduser">
+        <mat-option *ngFor="let user of listOfSelectedUser" [value]="user">
+          {{user.username}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </modal-body>
+  <modal-footer>
+    <button mat-raised-button color="warn" data-dismiss="modal" (click)="reassignedticket.dismiss()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="reassignedTicket(selecteduser)">Yes</button>
+  </modal-footer>
+</modal>
+<style>
+</style>

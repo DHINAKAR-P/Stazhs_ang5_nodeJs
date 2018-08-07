@@ -1,0 +1,35 @@
+<div class="auth-block">
+  <div class="text-center">
+    <img src="assets/img/logo.png" height="80" width="80">
+  </div>
+  <div>
+
+  <form id="login-form" novalidate #f="ngForm">  
+    <div class="login-form">
+      <div class="form-group">
+        <input align="middle" type="email" class="form-control" [(ngModel)]="data.username" 
+        id="InputEmail1" aria-describedby="emailHelp" name="username" placeholder="Username" required #username="ngModel">
+        <div style="color:red;" *ngIf="username.errors && (username.dirty || username.touched)">
+            <p class="err-msg" *ngIf="username.errors.required">Username is required</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control" id="InputPassword1" [(ngModel)]="data.password"
+         placeholder="Password"  required #password="ngModel">
+         <div style="color:red;" *ngIf="password.errors && (password.dirty || password.touched)">
+            <p class="err-msg" *ngIf="password.errors.required">Password  is required</p>
+         </div>
+      </div>
+
+      <div style="color:red; text-align:center;">
+          {{errorDiagnostic}}
+      </div>
+      <div class="text-center">
+        <button (click)="onSubmit()" [disabled]="f.invalid" class="btn btn-default login-btn" >Login <i [hidden]="!spinnerlogo" class="fas fa-spin fa-spinner"></i> </button>
+      </div>
+      
+    </div>
+  </form>
+  </div>
+</div>
+<br>

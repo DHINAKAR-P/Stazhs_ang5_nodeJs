@@ -1,0 +1,43 @@
+<app-sidenav></app-sidenav>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-11">
+      <h2>New Users Role</h2>
+    </div>
+  </div>
+  <div class="container body">
+    <div class="row">
+      <div class="col-lg-10">
+        <mat-form-field>
+          <input class="uppercase" oninput="this.value = this.value.toUpperCase()" matInput placeholder="Role Name" [(ngModel)]="role.role" (ngModelChange)="textChanged()" required>
+        </mat-form-field>
+        <span *ngIf="duplicaterole" class="warningmsg">Role Already Exists</span>
+      </div>
+      <div class="col-lg-2" *ngIf="adminrole">
+        <mat-form-field>
+          <mat-select placeholder="Select Organisation" [(ngModel)]='role.organizationUuid' (ngModelChange)="organizationchanged($event)" required>
+            <mat-option *ngFor="let rl of organizationlist" [value]="rl.uuid">{{rl.organizationname}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <h4>Selection the actions available for this role</h4>
+    <mat-selection-list [(ngModel)]="test" #screens>
+      <mat-list-option (click)="allowedScreenList(screen)" [value]="screen" *ngFor="let screen of screensForAction">
+        {{screen}}
+      </mat-list-option>
+    </mat-selection-list>
+    <p>
+      Options selected: {{screens.selectedOptions.selected.length}}
+    </p>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+    </div>
+    <div class="col-lg-4">
+      <button mat-raised-button color="warn" [routerLink]="['/user-roles']">Cancel</button>
+      <button mat-raised-button *ngIf="update" [disabled]="!role.role || duplicaterole" (click)="updateUserRole()" color="primary">Update Role</button>
+      <button mat-raised-button *ngIf="!update" [disabled]="!role.role || organizationRole || duplicaterole" (click)="createUserRole()" color="primary">Add Role</button>
+    </div>
+  </div>
+</div>

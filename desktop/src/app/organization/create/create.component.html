@@ -1,0 +1,49 @@
+<app-sidenav></app-sidenav>
+<div class="container" style="text-align: center; padding: 20px 10%">
+    <div class="row">
+        <div class="col-lg-11">
+            <h2 *ngIf="!update">Add New organization</h2>
+            <h2 *ngIf="update">Update organization</h2>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+      
+
+        <div *ngIf="!imageshow && !update">
+            <ngx-avatar class="fas fa-briefcase fa-w-14 fa-7x " style="cursor: pointer;" (clickOnAvatar)="fileInput.click()">
+            </ngx-avatar>
+            <input style="margin-left: 17%;display: none" type="file" #fileInput ng2FileSelect [uploader]="uploader" (change)="Previewimage($event)"
+            />
+        </div>
+        <div *ngIf="update && imageshow">
+            <img [src]="localUrl" *ngIf="localUrl"  class="imgPlaceholder">
+        </div>
+        <div *ngIf="update && !imageshow">
+            <img [src]="location" (click)="fileInput.click()" style="cursor: pointer;" class="imgPlaceholder" >
+            <input style="margin-left: 17%;display: none" type="file" #fileInput ng2FileSelect [uploader]="uploader" (change)="Previewimage($event)"/>
+        </div>
+        <div *ngIf="!update && imageshow">
+            <img [src]="localUrl" *ngIf="localUrl"  class="imgPlaceholder">
+        </div>
+
+        <div class="col-lg-4 col-lg-offset-4">
+            <mat-form-field>
+                <input matInput placeholder="Enter your organization Name" (keypress)="omit_special_char($event)" [(ngModel)]='organization.organizationname'
+                    required>
+            </mat-form-field>
+            <!-- <input style="margin-left: 17%;" type="file" #fileInput ng2FileSelect [uploader]="uploader" multiple/> -->
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+        </div>
+        <div class="col-lg-4">
+            <button mat-raised-button disabled *ngIf="!update" [disabled]="organization.organizationname.length === 0 || !isImage" color="primary"
+                (click)="createOrg()">Save</button>
+            <button mat-raised-button *ngIf="update" [disabled]="organization.organizationname.length === 0" color="primary" (click)="updateOrg()">Update</button>
+            <button mat-raised-button color="warn" [routerLink]="['/organization']">Cancel</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+.actiontext{
+    color: blue
+}
+.button{
+    left:84%;
+    padding: 1%;
+}
+.mat-table {
+    width: 100%;
+  }
+  
+  .th.mat-sort-header-sorted {
+    color: black;
+  }

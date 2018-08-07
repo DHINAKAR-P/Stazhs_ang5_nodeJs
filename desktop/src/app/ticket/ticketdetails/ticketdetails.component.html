@@ -1,0 +1,258 @@
+<app-sidenav></app-sidenav>
+
+<div class="container">
+    <div>
+        <a class="bread-crumb" [routerLink]="['/ticket']">Tickets</a> > Ticket Detail
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- <div *ngIf="showDetails"> -->
+    <div>
+        <div class="row ticketDetailsRow">
+            <div class="col-lg-4 TicketIdMainDiv">
+                <div class="TicketSubDiv">
+                    <span class="ticketID">Ticket ID</span>
+                    <span class="ticketIdValue">{{ticketDetails?.id}}</span>
+                </div>
+                <div>
+                    <a class="bread-crumb">{{ticketDetails?.Status}}</a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <mat-card>
+                    <div class="row createByMainDiv">
+                        <div class="row createByFirstRow">
+                            Create by:
+                            <span>{{ticketDetails?.created_by?.firstname}}</span>&nbsp;&nbsp;
+                            <span>Assigned to: </span>
+                            <span *ngFor="let assigned of ticketDetails?.assigned_to">{{assigned?.firstname}} &nbsp;</span>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <mat-select *ngIf="organizationname === 'Stahls'" placeholder="Organization" [(value)]="selected">
+                                    <mat-option *ngFor="let org of allOrganization" (click)="filterOrg(selected)" [value]="org">
+                                        {{ org?.organizationname }}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                            <!-- <mat-select *ngIf="organizationname === 'Stahls'" placeholder="Assign Tickets" [(value)]="selected" multiple>
+                                <mat-option *ngFor="let user of userToDisplay" (click)="assignTicket(selected)" [value]="user">
+                                    {{ user.firstname }}
+                                </mat-option>
+                            </mat-select> -->
+                            <!-- <mat-form-field class="CreatedByField">
+                                <mat-select (change)="filterOrg(selectedValues)" placeholder="Organization" multiple [formControl]="selectedValues">
+                                    <mat-option *ngFor="let org of allOrganization" [value]="org">
+                                        {{ org.organizationname }}
+                                    </mat-option>
+                                </mat-select>
+                              </mat-form-field> -->
+
+                            <div class="col-lg-5">
+                                <mat-select *ngIf="organizationname === 'Stahls'" placeholder="Assign Tickets" multiple [formControl]="selectedValues">
+                                    <mat-option *ngFor="let user of userToDisplay" [value]="user">
+                                        {{ user.firstname }}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col-lg-2">
+                                <button mat-raised-button color="primary" *ngIf="organizationname === 'Stahls'" (click)="saveAssignedUserTicket()">Assign</button>
+                            </div>
+
+
+                            <div class="col-lg-5">
+                                <mat-select *ngIf="organizationname !== 'Stahls'" placeholder="Organization" [(value)]="selected">
+                                    <mat-option *ngFor="let org of myOrganization" (click)="filterOrg(selected)" [value]="org">
+                                        {{ org.organizationname }}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col-lg-5">
+                                <mat-select *ngIf="organizationname !== 'Stahls'" placeholder="Assign Tickets" multiple [formControl]="selectedValues">
+                                    <mat-option *ngFor="let user of userToDisplay" [value]="user">
+                                        {{ user.firstname }}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col-lg-2">
+                                <button mat-raised-button color="primary" *ngIf="organizationname !== 'Stahls'" (click)="saveAssignedUserTicket()">Assign</button>
+                            </div>
+
+
+
+
+                        </div>
+                        <!-- <div class="createByNameDiv">{{ticketDetails.created_by.firstname}}</div> -->
+                    </div>
+                </mat-card>
+            </div>
+            <!-- <div class="col-lg-4">
+                <mat-card>
+                    <div class="order-assign-box">
+                        <mat-select *ngIf="organizationname === 'Stahls'" placeholder="Organization" [(value)]="selected">
+                            <mat-option *ngFor="let org of allOrganization" (click)="filterOrg(selected)" [value]="org">
+                                {{ org.organizationname }}
+                              </mat-option>
+                        </mat-select>
+
+                        <mat-select *ngIf="organizationname === 'Stahls'" placeholder="Assign Tickets" [(value)]="selected">
+                            <mat-option *ngFor="let user of userToDisplay" (click)="assignTicket(selected)" [value]="user">
+                                {{ user.firstname }}
+                              </mat-option>
+                        </mat-select>
+                    </div>
+                    <div class="assignedToMainDiv">
+                        <div class="assignedToDiv">
+                            Assigned to:
+                        </div>
+                        <div class="assignedToNameDiv">{{ticketDetails.assigned_to?.firstname}}</div>
+                    </div>
+                </mat-card>
+            </div> -->
+        </div>
+        <div class="row downloadDiv">
+            <button mat-raised-button color="primary" [ngClass]="ticketDetails?.attachments?.length == 0 ? 'disableDownload' : 'downloadButton'"
+                [disabled]="ticketDetails?.attachments?.length == 0" (click)="download()">
+                <span class="fa fa-download faDownloadStyle"></span>&nbsp;Download attachments</button>
+
+        </div>
+        <br>
+        <div class="row DateMainDiv">
+            <div>
+                <span style="font-size: 20px;">{{ticketDetails?.Date | date:'MM/dd/yyyy'}} -</span>
+                <span class="ticketType">{{ticketDetails?.Type}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <mat-card class="descriptionCard">
+                <div>
+                    <span>
+                        <strong>Description:&nbsp;</strong>
+                    </span>
+                    <span>{{ticketDetails?.description}}</span>
+                </div>
+                <div *ngIf="ticketDetails?.Status === 'Closed'">
+                    <span>
+                        <strong>
+                            <sup>**</sup>Closing Remarks:&nbsp;</strong>
+                    </span>
+                    <span>{{ticketDetails?.CloseReason?.Reason}}</span>
+                </div>
+            </mat-card>
+        </div>
+        <div class="row">
+            <mat-card class="detailCard">
+                <div class="row">this is the information</div>
+                <div class="row">by:
+                    <span *ngFor="let assigned of ticketDetails?.assigned_to">{{assigned?.firstname}} &nbsp;</span> - {{ticketDetails?.Date | date: 'MM/dd/yyyy'}}</div>
+            </mat-card>
+        </div>
+        <div class="row closeTicketButtonDiv">
+            <button mat-raised-button [disabled]="ticketDetails?.Status === 'close'" class="closeButton" (click)="openCloseTicketModal()">Close Ticket</button>
+            &nbsp;&nbsp;
+            <!-- <button mat-raised-button (click)="sendMessage()" class="sendButton">Send Message</button> -->
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-10 orderTicketText">Orders on this ticket</div>
+        <div *ngIf="showDetails" class="col-md-2" (click)="showDetails = false">
+            <u class="booleanDetails">Hide details</u>
+        </div>
+        <div *ngIf="!showDetails" class="col-md-2" (click)="showDetails = true">
+            <u class="booleanDetails">Show details</u>
+        </div>
+    </div> -->
+
+    <br>
+    <div class="ticket-container mat-elevation-z8 col-xs-12">
+
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="Number">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Number </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.OrderNumber}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Location">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <div *ngIf="row.CompanyCode == ''">-</div>
+                    <div *ngIf="row.CompanyCode != ''">{{row.CompanyCode}}</div>
+                </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="PO#">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> PO# </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.PONumber}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Requested">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Requested </mat-header-cell>
+                <mat-cell *matCellDef="let row" [style.color]="green"> {{row.RequiredDate | date:'MM/dd/yyyy'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.StatusName}}
+                    <!-- <span *ngIf="row.status=='NEW'" class="badge blue">{{row.status}}</span>
+          <span *ngIf="row.status=='In Progress'" class="badge green">{{row.status}}</span>
+          <span *ngIf="row.status=='Delayed'" class="badge orange">{{row.status}}</span>
+          <span *ngIf="row.status=='Received'" class="badge dark">{{row.status}}</span>
+          <span *ngIf="row.status=='Shipped'" class="badge brown">{{row.status}}</span> -->
+
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Tickets">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tickets </mat-header-cell>
+                <mat-cell *matCellDef="let row" [style.color]="green">{{row.Tickets}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Forecasted">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Forcasted </mat-header-cell>
+                <mat-cell *matCellDef="let row" [style.color]="blue">
+                    <div *ngIf="row.ForecastFinish == null">-</div>
+                    <div *ngIf="row.ForecastFinish != null"> {{row.ForecastFinish | date:'MM/dd/yyyy'}} </div>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>
+
+        <!-- <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+    </mat-paginator> -->
+    </div>
+
+</div>
+
+
+
+
+<modal #closeTicket>
+    <modal-header>
+        <h4>Close Ticket</h4>
+    </modal-header>
+    <modal-body>
+        <div>
+            <strong>You are closing this ticket because:</strong>
+        </div>
+        <div class="optionDiv">
+            <mat-radio-group [(ngModel)]="closedMessage">
+                <mat-radio-button *ngFor="let reason of Reason" name="more_options" [value]="reason">
+                    {{reason.Reason}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </modal-body>
+    <modal-footer>
+        <button mat-raised-button class="closeModalButton" (click)="closeTicketOption()">Close Ticket</button>
+    </modal-footer>
+</modal>

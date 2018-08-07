@@ -1,0 +1,26 @@
+{
+  "name": "stahls_analytics_pacakge",
+  "version": "1.0.0",
+  "private": false,
+  "scripts": {
+    "start": "node main"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.3",
+    "cookie-parser": "~1.4.3",
+    "cors": "~2.8.4",
+    "date-diff": "~0.2.0",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "fs": "~0.0.1-security",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "pug": "~2.0.0-beta11",
+    "sequelize": "~4.38.0",
+    "tedious": "~2.6.1",
+    "shortid": "~2.2.8"
+  },
+  "publishConfig": {
+    "registry":"http://104.210.55.239:8081/repository/npm-hosted/"
+  }
+}

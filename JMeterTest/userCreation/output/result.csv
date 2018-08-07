@@ -1,0 +1,61 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,Latency,IdleTime,Connect
+1532064392253,19771,41 /auth/login,200,OK,Thread Group 1-1,text,true,,1715,455,2,2,19771,0,19204
+1532064392253,19757,41 /auth/login,400,Bad Request,Thread Group 1-2,text,false,,617,455,2,2,19756,0,18052
+1532064412115,838,83 /api/Organization/getall,401,Unauthorized,Thread Group 1-2,,false,,515,408,2,2,838,0,504
+1532064412954,326,82 /api/Authorities/getall,401,Unauthorized,Thread Group 1-2,,false,,515,407,2,2,326,0,0
+1532064413282,257,93 /api/Authorities/getall,401,Unauthorized,Thread Group 1-2,,false,,515,407,2,2,257,0,0
+1532064413540,268,94 /api/User/create,401,Unauthorized,Thread Group 1-2,,false,,515,634,2,2,268,0,0
+1532064413809,352,95 /api/User/getall,401,Unauthorized,Thread Group 1-2,,false,,515,397,2,2,352,0,0
+1532064412114,2244,83 /api/Organization/getall,200,OK,Thread Group 1-1,text,true,,3447,1087,2,2,2243,0,1958
+1532064414165,1605,41 /auth/login,200,OK,Thread Group 1-2,text,true,,1715,447,2,2,1605,0,1250
+1532064415772,374,83 /api/Organization/getall,200,OK,Thread Group 1-2,text,true,,3447,1087,2,2,374,0,0
+1532064416147,293,82 /api/Authorities/getall,200,OK,Thread Group 1-2,text,true,,5040,1086,2,2,292,0,0
+1532064416440,1826,93 /api/Authorities/getall,200,OK,Thread Group 1-2,text,true,,5040,1086,2,2,1825,0,1508
+1532064418266,865,94 /api/User/create,200,OK,Thread Group 1-2,text,true,,759,1297,2,2,865,0,0
+1532064414361,4788,82 /api/Authorities/getall,200,OK,Thread Group 1-1,text,true,,5040,1086,2,2,4788,0,1202
+1532064419150,1645,93 /api/Authorities/getall,200,OK,Thread Group 1-1,text,true,,5040,1086,2,2,1645,0,1228
+1532064419133,1681,95 /api/User/getall,200,OK,Thread Group 1-2,text,true,,6942,1076,2,2,1681,0,1245
+1532064420815,753,41 /auth/login,400,Bad Request,Thread Group 1-2,text,false,,617,1126,2,2,753,0,0
+1532064420796,1133,94 /api/User/create,200,OK,Thread Group 1-1,text,true,,761,1297,2,2,1133,0,0
+1532064421570,1602,83 /api/Organization/getall,401,Unauthorized,Thread Group 1-2,,false,,515,408,2,2,1602,0,1332
+1532064423173,255,82 /api/Authorities/getall,401,Unauthorized,Thread Group 1-2,,false,,515,407,2,2,255,0,0
+1532064421930,1673,95 /api/User/getall,200,OK,Thread Group 1-1,text,true,,7331,1076,2,2,1658,0,1278
+1532064423605,303,41 /auth/login,200,OK,Thread Group 1-1,text,true,,1715,1126,2,2,303,0,0
+1532064423910,1051,83 /api/Organization/getall,200,OK,Thread Group 1-1,text,true,,3447,1087,2,2,1051,0,0
+1532064423429,2284,93 /api/Authorities/getall,401,Unauthorized,Thread Group 1-2,,false,,515,407,2,2,2284,0,0
+1532064424963,2050,82 /api/Authorities/getall,200,OK,Thread Group 1-1,text,true,,5040,1086,2,2,2027,0,1744
+1532064425714,1490,94 /api/User/create,401,Unauthorized,Thread Group 1-2,,false,,515,628,2,2,1490,0,1237
+1532064427205,265,95 /api/User/getall,401,Unauthorized,Thread Group 1-2,,false,,515,397,2,2,265,0,0
+1532064427471,276,41 /auth/login,400,Bad Request,Thread Group 1-2,text,false,,617,447,2,2,276,0,0
+1532064427015,2248,93 /api/Authorities/getall,200,OK,Thread Group 1-1,text,true,,5040,1086,2,2,1919,0,1236
+1532064427747,2083,83 /api/Organization/getall,401,Unauthorized,Thread Group 1-2,,false,,515,408,2,2,2083,0,1649
+1532064429264,1986,94 /api/User/create,200,OK,Thread Group 1-1,text,true,,761,1297,2,2,1986,0,1719
+1532064431251,590,95 /api/User/getall,200,OK,Thread Group 1-1,text,true,,7720,1076,2,2,590,0,0
+1532064429831,2308,82 /api/Authorities/getall,401,Unauthorized,Thread Group 1-2,,false,,515,407,2,2,2308,0,2010
+1532064431843,2020,41 /auth/login,200,OK,Thread Group 1-1,text,true,,1715,1126,2,2,2020,0,1464
+1532064432140,2230,93 /api/Authorities/getall,401,Unauthorized,Thread Group 1-2,,false,,515,407,2,2,2230,0,1723
+1532064433866,7904,83 /api/Organization/getall,200,OK,Thread Group 1-1,text,true,,3447,1087,2,2,7904,0,7487
+1532064441770,1829,82 /api/Authorities/getall,200,OK,Thread Group 1-1,text,true,,5040,1086,2,2,1829,0,1450
+1532064434370,9563,94 /api/User/create,401,Unauthorized,Thread Group 1-2,,false,,515,632,2,2,9563,0,9229
+1532064443600,378,93 /api/Authorities/getall,200,OK,Thread Group 1-1,text,true,,5040,1086,2,2,368,0,0
+1532064443934,1355,95 /api/User/getall,401,Unauthorized,Thread Group 1-2,,false,,515,397,2,2,1355,0,1083
+1532064445290,274,41 /auth/login,400,Bad Request,Thread Group 1-2,text,false,,617,447,2,2,274,0,0
+1532064443979,1637,94 /api/User/create,200,OK,Thread Group 1-1,text,true,,767,1305,2,2,1637,0,1299
+1532064445565,259,83 /api/Organization/getall,401,Unauthorized,Thread Group 1-2,,false,,515,408,2,2,259,0,0
+1532064445617,307,95 /api/User/getall,200,OK,Thread Group 1-1,text,true,,8101,1076,2,2,307,0,0
+1532064445927,332,41 /auth/login,200,OK,Thread Group 1-1,text,true,,1715,1126,2,2,332,0,0
+1532064445825,1066,82 /api/Authorities/getall,401,Unauthorized,Thread Group 1-2,,false,,515,407,2,2,1066,0,0
+1532064446262,1760,83 /api/Organization/getall,200,OK,Thread Group 1-1,text,true,,3447,1087,2,2,1760,0,1470
+1532064448023,366,82 /api/Authorities/getall,200,OK,Thread Group 1-1,text,true,,5040,1086,2,2,366,0,0
+1532064446892,1653,93 /api/Authorities/getall,401,Unauthorized,Thread Group 1-2,,false,,515,407,2,2,1652,0,1364
+1532064448545,328,94 /api/User/create,401,Unauthorized,Thread Group 1-2,,false,,515,632,2,2,328,0,0
+1532064448874,273,95 /api/User/getall,401,Unauthorized,Thread Group 1-2,,false,,515,397,2,2,273,0,0
+1532064448390,1397,93 /api/Authorities/getall,200,OK,Thread Group 1-1,text,true,,5040,1086,1,1,1389,0,1113
+1532064449788,290,94 /api/User/create,200,OK,Thread Group 1-1,text,true,,759,1297,1,1,290,0,0
+1532064450079,346,95 /api/User/getall,200,OK,Thread Group 1-1,text,true,,8474,1076,1,1,346,0,0
+1532064450426,1383,41 /auth/login,400,Bad Request,Thread Group 1-1,text,false,,617,1126,1,1,1382,0,1103
+1532064451810,259,83 /api/Organization/getall,401,Unauthorized,Thread Group 1-1,,false,,515,408,1,1,259,0,0
+1532064452070,270,82 /api/Authorities/getall,401,Unauthorized,Thread Group 1-1,,false,,515,407,1,1,270,0,0
+1532064452341,383,93 /api/Authorities/getall,401,Unauthorized,Thread Group 1-1,,false,,515,407,1,1,383,0,0
+1532064452725,1374,94 /api/User/create,401,Unauthorized,Thread Group 1-1,,false,,515,610,1,1,1374,0,1122
+1532064454099,255,95 /api/User/getall,401,Unauthorized,Thread Group 1-1,,false,,515,397,1,1,255,0,0

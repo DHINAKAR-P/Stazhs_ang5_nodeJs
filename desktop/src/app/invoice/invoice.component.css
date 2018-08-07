@@ -1,0 +1,154 @@
+.searchbar{
+    height: 10%;
+    width: 100%;
+    border-radius: 1px;
+    /* border-color: black; */
+    /* border-style: solid; */
+    border-width: 1px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: 0%;
+}
+
+.header th{
+  padding:20px;
+}
+.tablebody{
+  text-align: center;
+}
+.content td{
+  text-align: center;
+  margin-left: 18px;
+}
+.element-row {
+  position: relative;
+}
+
+.txtcolor{
+  color: rgb(127, 140, 141);
+  font-weight: 100;
+  border: none;
+  margin-top: 2%;
+  margin-left: 1%;
+}
+
+.badge{
+  border-radius: unset;
+  width: 70%;
+}
+
+.searchbox{
+  margin-bottom: -4%;
+  margin-left: 2%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 'regular';
+  font-size: 18px;
+  color:#ccc;
+}
+
+.search {
+  position: relative;
+  color: black;
+  font-size: 16px;
+  margin-top: 4%;
+}
+
+.search input {
+  width: 250px;
+  height: 32px;
+
+  background: #fcfcfc;
+  border: 1px solid black;
+  border-radius: 16px;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.search input { text-indent: 32px;}
+.search .fa-search { 
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.faStyle {
+  color: rgb(127, 140, 141);
+}
+.pull-right {
+  margin-left: 69%;
+  margin-top: -4%;
+}
+.filterName {
+  margin-right: 10px
+}
+.locationField {
+  width: 5em;
+}
+.ticketField {
+  width: 5em;
+}
+.statusField {
+  width: 5em;
+}
+.blue {
+  color:white;
+  background: #0066cc
+}
+.green {
+  color : white;
+  background-color: #009900;
+}
+.orange {
+  color:white;
+  background-color: #ff9900
+}
+.dark {
+  color:white;
+  background-color: #003366
+}
+.brown {
+  color:white;
+  background-color: #666666;
+}
+
+.mat-paginator-page-size {
+  margin-right: 67% !important;
+}
+
+.mat-table{
+  overflow-y: hidden;
+}
+
+@media only screen and (width: 1024px) {
+  .pull-right {
+    margin-left: 57%;
+    margin-top: -4%;
+}
+}
+
+
+@media only screen and (width: 768px) {
+  .pull-right {
+    margin-left: 48%;
+    margin-top: -6%;
+}
+}
+
+@media only screen and (max-width: 700px) and (min-width: 375px) {
+  .pull-right[_ngcontent-c1] {
+    margin-left: 1%;
+    margin-top: -1%;
+}
+.searchOrderDiv {
+  margin-left: 21%;
+}
+}
+
+@media only screen and (max-width: 375px) {
+  .pull-right {
+    margin-left: 11%;
+    margin-top: 0%;
+}
+.searchOrderDiv {
+  margin-left: 13%;
+}
+}

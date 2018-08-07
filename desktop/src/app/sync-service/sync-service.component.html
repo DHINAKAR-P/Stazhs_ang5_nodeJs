@@ -1,0 +1,30 @@
+<app-sidenav></app-sidenav>
+
+
+<div>
+
+    <div class="col-md-10 orderTicketText">Data Syncronization Details</div>
+
+    <br>
+
+    <div class="form-txt">
+      <span>Time Frequency For Syncronization:</span> 
+      <!-- <mat-form-field class="example-full-width">
+        
+        <input (click)="enable=true" matInput placeholder="In Minutes" [(ngModel)]="time">
+      </mat-form-field> -->
+      <mat-slider
+      thumbLabel="true"
+      color="warn"
+      tickInterval="1"
+      min="1"
+      max="60"
+      [(ngModel)]="sliderValue"></mat-slider> <span style="color:#b4b6b7">(IN MIN)</span>
+      <br>
+      <br>
+      <button style="margin-left: 36%;" mat-raised-button color='primary'  (click)="updateTime()">Update</button>
+      
+      <!-- <button style="margin-left: 36%;" mat-raised-button color='primary' [disabled]="!enable"  (click)="updateTime()">Update</button> -->
+    </div>
+</div>  
+

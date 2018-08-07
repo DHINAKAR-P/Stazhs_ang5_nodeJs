@@ -1,0 +1,13 @@
+.body{
+    margin-top: 3%
+}
+.warning{
+    color: orange;
+}
+.modal-header{
+    color: #010214;
+}
+.warningmsg{
+    color: red;
+    font-size: 14px;
+}

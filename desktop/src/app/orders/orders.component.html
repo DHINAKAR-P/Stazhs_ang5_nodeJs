@@ -1,0 +1,192 @@
+<app-sidenav></app-sidenav>
+<div *ngIf="Complete">
+  <div class="alert alert-primary custom-alert">
+    <strong> {{CompleteOrders}} Complete </strong>
+    <span style="cursor: pointer;text-decoration:underline" class="alert-link" (click)=ComOrder()>Orders</span>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Completeclick()"></i>
+  </div>
+</div>
+<div *ngIf="InComplete">
+  <div class="alert alert-danger custom-alert">
+    <strong> {{InCompleteOrders}} InComplete </strong>
+    <span style="cursor: pointer;text-decoration:underline" class="alert-link" (click)=InComOrder()>Orders</span>
+    <i class="fa fa-times-circle notify-icon    close" (click)="InCompleteclick()"></i>
+  </div>
+</div>
+<div *ngIf="Processed">
+  <div class="alert alert-warning custom-alert">
+    <strong> {{ProcessedOrders}} Processed </strong>
+    <span style="cursor: pointer;text-decoration:underline" class="alert-link" (click)=ProcOrder()>Orders</span>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Processedclick()"></i>
+  </div>
+</div>
+<div *ngIf="Shipped">
+  <div class="alert alert-success custom-alert">
+    <strong> {{ShippedOrders}} Shipped </strong>
+    <span style="cursor: pointer;text-decoration:underline" class="alert-link" (click)=ShipOrder()>Orders</span>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Shippedclick()"></i>
+  </div>
+</div>
+<div *ngIf="Void">
+  <div class="alert alert-info custom-alert">
+    <strong> {{VoidOrders}} Void </strong>
+    <span style="cursor: pointer;text-decoration:underline" class="alert-link" (click)=VoidOrder()>Orders</span>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Voidclick()"></i>
+  </div>
+</div>
+<div *ngIf="Hold">
+  <div class="alert alert-info custom-alert">
+    <strong> {{HoldOrders}} Hold </strong>
+    <span style="cursor: pointer;text-decoration:underline" class="alert-link" (click)=HoldOrder()>Orders</span>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Holdclick()"></i>
+  </div>
+</div>
+<div *ngIf="Released">
+  <div class="alert alert-info custom-alert">
+    <strong> {{ReleasedOrders}} Released </strong>
+    <span style="cursor: pointer;text-decoration:underline" class="alert-link" (click)=ReleasedOrder()>Orders</span>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Releasedclick()"></i>
+  </div>
+</div>
+<div *ngIf="Committed">
+  <div class="alert alert-info custom-alert">
+    <strong> {{CommittedOrders}} Committed </strong>
+    <span style="cursor: pointer;text-decoration:underline" class="alert-link" (click)=CommittedOrder()>Orders</span>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Committedclick()"></i>
+  </div>
+</div>
+
+
+<div class="container">
+    <ng4-loading-spinner [threshold]="2000" [zIndex]="0" > </ng4-loading-spinner>
+  <!-- <h1>
+    <span class="title">
+      <b (click)="test()">Orders Summary</b>
+    </span>
+  </h1> -->
+  <div class="row">
+    <div class="col-md-10 orderTicketText">Orders Summary</div>
+    <div *ngIf="Complete || InComplete || Void || Shipped || Processed" class="col-md-2" (click)="Dismiss()">
+      <u class="booleanDetails">Dismiss All</u>
+    </div>
+  </div>
+  <mat-card class="searchbar row">
+    <!-- <span class="fa fa-search faStyle"></span>
+    <input class="form-control fa fa-search txtcolor" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)"> -->
+
+    <div>
+      <span class="fa fa-search faStyle"></span>
+      <input class="txtcolor" type="text" placeholder="Search" (keyup)="applyFilter($event.target.value)">
+    </div>
+
+    <div class="pull-right">
+      <i class="filterName">Filter by</i>
+      <span>
+        <mat-form-field class="locationField">
+          <mat-select placeholder="Location" multiple [formControl]="selectfilter" (change)="Locationfilter()">
+            <mat-option *ngFor="let location of filter_OrderLocation" [value]="location">{{location}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="ticketField">
+          <mat-select placeholder="Tickets" multiple [formControl]="selectfilter" (change)="Ticketfilter()">
+            <mat-option *ngFor="let ticket of filter_OrderTickets" [value]="ticket">{{ticket}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="statusField">
+          <mat-select placeholder="Status" multiple [formControl]="selectfilter" (change)="Statusfilter()">
+            <mat-option *ngFor="let status of filter_OrderStatus" [value]="status">{{status}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+    </div>
+  </mat-card>
+
+  <br>
+  <div class="ticket-container mat-elevation-z8 col-xs-12">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="Number">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Number </mat-header-cell>
+        <mat-cell style="color: blue;cursor: pointer" *matCellDef="let row"> {{row.OrderNumber}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Location">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{row.CompanyCode}}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="PO#">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> PO# </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.PONumber}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Order date </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf = "row.OrderDate === null">-</span>
+          <span *ngIf = "row.OrderDate != null"> {{row.OrderDate | date:'MM/dd/yyyy'}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Requested">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Requested </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green">
+           <span *ngIf = "row.RequiredDate === null">-</span>
+           <span *ngIf = "row.RequiredDate != null">{{row.RequiredDate | date:'MM/dd/yyyy'}}</span>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Forecasted">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Forcasted </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf ="row.ForecastFinish === null">-</span>
+          <span *ngIf ="row.ForecastFinish != null">{{row.ForecastFinish | date:'MM/dd/yyyy'}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Tickets">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tickets </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf = "row.Tickets == null">0</span>
+          <span *ngIf = "row.Tickets != null ">{{row.Tickets}}</span> 
+        </mat-cell>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="Status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf="row.StatusName !='Processed' && row.StatusName !='Released' && row.StatusName !='Complete' && row.StatusName !='Incomplete' && row.StatusName !='Void' && row.StatusName !='Shipped' && row.StatusName !='Hold' &&
+          row.StatusName !='Committed' "
+            class="badge grey">--</span>
+          <span *ngIf="row.StatusName ==='Processed'" class="badge grey">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='New'" class="badge grey">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Incomplete'" class="badge orange">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Void'" class="badge orange">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Complete'" class="badge green">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Shipped'" class="badge light blue">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Released'" class="badge light blue">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Hold'" class="badge light blue">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Committed'" class="badge green">{{row.StatusName}}</span>
+
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row (click)="onRowSelected(row)" *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator  #paginator [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+
+</div>

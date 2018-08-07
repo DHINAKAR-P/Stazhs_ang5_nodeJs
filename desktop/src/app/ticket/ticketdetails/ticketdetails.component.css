@@ -1,0 +1,145 @@
+
+.createByImg {
+    width: 66px;
+    height: 55px;
+    background-size: cover;
+    margin-top: -17%
+}
+.assignedToImg {
+    width: 66px;
+    height: 55px;
+    background-size: cover;
+    margin-top: -17%
+}
+
+.disableDownload {
+    cursor: not-allowed !important;
+}
+
+.bread-crumb{
+    text-decoration: underline;
+    margin-right: 4px;
+}
+
+.assignToImage{
+    /* background-image: url('assets/img/New-Balance-logo.png'); */
+    background-size: cover;
+    display: -webkit-inline-box;
+}
+.createByMainDiv {
+    /* float: right;
+    margin-top: -44px; */
+    /* margin-top: -11%;  */
+}
+.assignedToMainDiv {
+    /* float: right;
+    margin-top: -44px; */
+}
+.createByFirstRow {
+    padding-bottom: 2%;
+}
+.mat-select {
+    width: 45%;
+}
+.TicketIdMainDiv{
+}
+.faDownloadStyle {
+    color: white;
+}
+.downloadDiv {
+    float: right;
+    margin-top: 2%;
+}
+.downloadButton {
+    margin-left: -9%
+}
+.DateMainDiv {
+    margin-top: 4%;
+    /* margin-left: 2%; */
+    font-weight: bolder;
+    margin-left: 0%;
+}
+.ticketType {
+    color: red;
+    font-size: 20px;
+}
+.descriptionCard {
+    width: 100%;
+}
+.detailCard {
+    margin-top: 2%;
+    width: 80%;
+    margin-left: 20%;
+    background-color: lightgray;
+}
+.optionDiv {
+    margin-top: 2%;
+    display: table-caption;
+}
+.closeTicketButtonDiv {
+    float: right;
+    margin-top: 2%;
+}
+.closeButton {
+    background-color: lightgrey;
+}
+.closeModalButton {
+    background-color: lightgray;
+    margin-right: 41%;
+}
+.sendButton {
+    background-color: lightgray;
+}
+.ticketID {
+font-weight: bolder;
+margin-left: 6px;
+font-size: 20px;
+}
+.ticketIdValue {
+    font-weight: bolder;
+}
+.orderTicketText {
+    font-size: 20px;
+    font-weight: bolder;
+}
+.row {
+    margin-left: 0px;
+}
+.booleanDetails {
+    color: blue;
+    cursor: pointer;
+}
+.details {
+    margin-left: 76%;
+}
+.ticketDetailsRow {
+    margin-top: -4%;
+}
+.TicketSubDiv {
+display: grid;
+}
+.order-assign-box{
+    width: 50%;
+    min-height: 40px;
+}
+
+@media only screen and (width: 1024px) {
+    .details {
+        margin-top: -3%;
+        margin-left: 87%;
+    }
+}
+@media only screen and (width: 768px) {
+    .details {
+        margin-top: -3%;
+        margin-left: 85%;
+    }
+    .TicketSubDiv {
+        display: inline-grid;   
+    }
+    .ticketIdValue {
+        font-weight: bolder;
+        font-size: 40px;
+        margin-top: -13%;
+    }
+}

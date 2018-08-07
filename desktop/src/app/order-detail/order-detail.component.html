@@ -1,0 +1,380 @@
+<app-sidenav>
+</app-sidenav>
+<ng4-loading-spinner>
+</ng4-loading-spinner>
+<div *ngIf="active">
+  <div class="alert alert-warning custom-alert">
+    <strong> {{activeorder}} Active Order Items</strong>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Activeclick()"></i>
+  </div>
+</div>
+<div *ngIf="shipped">
+  <div class="alert alert-success custom-alert">
+    <strong> {{Shippedorder}} Shipped Order Items</strong>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Shippedclick()"></i>
+  </div>
+</div>
+<div *ngIf="delayed">
+  <div class="alert alert-danger custom-alert">
+    <strong> {{Delayedorder}} Delayed Order Items</strong>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Delayedclick()"></i>
+  </div>
+</div>
+<div *ngIf="void">
+  <div class="alert alert-info custom-alert">
+    <strong> {{voidorder}} Void Order Items</strong>
+    <i class="fa fa-times-circle notify-icon    close" (click)="Voidclick()"></i>
+  </div>
+</div>
+
+
+<div class="container">
+
+  <div>
+    <a class="bread-crumb" [routerLink]="['/orders']">Orders</a> > Order Detail
+  </div>
+  <br>
+
+  <div class="top">
+    <div class="top-right">
+      <h3 class="top-txt">
+        <b>Order Number</b>
+      </h3>
+      <h3>
+        <b>{{Order?.OrderNumber}}</b>
+      </h3>
+      <span class="badge bg-success" style="width:62%">{{Order?.StatusName}}
+      <div class="comments" *ngIf="(Order?.StatusName === 'Hold' || Order?.StatusName === 'Void') && Order?.Comments9 != null "><span style="font-weight: bolder;">Comments </span>:&nbsp;{{Order?.Comments9}}
+      </div>
+      </span>
+      <!-- <span  class="comments">Comments:&nbsp;{{Order?.Comments9}}</span> -->
+      <!-- <div class="row">
+        <span class="badge bg-success">{{Order?.StatusName}}</span>
+        <div *ngIf="Order?.StatusName === 'Hold' && Order?.Comments9 != null ">
+          <div  class="comments">Comments:&nbsp;{{Order?.Comments9}}</div>
+        </div>
+        <div *ngIf="Order?.StatusName === 'Void' && Order?.Comments9 != null ">
+            <div  class="comments">Comments:&nbsp;{{Order?.Comments9}}</div>
+          </div>  
+      </div> -->
+      <!-- <span *ngIf="Order?.StatusName === 'Hold'" >{{Order?.Comments9}}</span> -->
+    </div>
+    <!-- <div class="row">
+    <span  class="comments" *ngIf="(Order?.StatusName === 'Hold' || Order?.StatusName === 'Void') && Order?.Comments9 != null ">Comments:&nbsp;{{Order?.Comments9}}</span>
+  </div> -->
+    <div class="steper" *ngIf="showStepper">
+      <mat-horizontal-stepper #stepper [selectedIndex]="setStepper()" [linear]='true' class="stepper-css">
+        <mat-step>
+          <span>Released</span>
+        </mat-step>
+        <mat-step>
+          <span style="margin-left: 29%;">Processed</span>
+        </mat-step>
+        <mat-step>
+          <span style="margin-left: 60%">Shipped</span>
+        </mat-step>
+        <mat-step>
+          <span style="margin-left: 85%;">Complete</span>
+        </mat-step>
+      </mat-horizontal-stepper>
+
+      <!-- <div class="step1"> 
+                <p class="step-text1">Order date</p>
+                <p class="step-text2">{{Order?.OrderDate | date:'dd/MM/yyyy'}}</p>
+              </div> 
+
+              <div class="step2"> 
+                <p class="step-text1">Requested</p>
+                <p class="step-text3">{{Order?.RequiredDate | date:'dd/MM/yyyy'}}</p>
+              </div>  -->
+
+
+    </div>
+
+  </div>
+
+  <div *ngIf="showDetails">
+
+    <mat-card class="mat-left">
+      <mat-card-content class="mat-left-con">
+
+        <div>
+          <h5 class="mat-text-left">Location</h5>
+          <h5 class="mat-text-left">PO#</h5>
+          <h5 class="mat-text-left">PO Date</h5>
+          <h5 class="mat-text-left">Customer's PO</h5>
+        </div>
+
+        <div class="text-allign">
+          <h5 *ngIf="Order?.CompanyCode === ''" class="mat-text-right">--</h5>
+          <h5 *ngIf="Order?.CompanyCode !== ''" class="mat-text-right">{{Order?.CompanyCode}}</h5>
+          <h5 class="mat-text-right">{{Order?.PONumber}}</h5>
+          <h5 class="mat-text-right">{{Order?.OrderDate | date:'MM/dd/yyyy'}}</h5>
+          <h5 class="mat-text-right">{{Order?.RetailerPONumber}}</h5>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+
+
+
+    <mat-card class="mat-right">
+      <mat-card-content *ngIf="ticketcount === null" class="mat-right-text">
+        <div>
+          <h5>
+            <b style="color: #212529a1;">Tickets</b>
+          </h5>
+          <p class="mat-text">No Tickets for this Order</p>
+        </div>
+
+        <div>
+          <div class="text-center">
+            <button class="btn btn-default new-btn" (click)="newticket()">
+              <i class="fa fa-plus-circle" style="color: white"></i> New Ticket</button>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-content *ngIf="ticketcount > 1" class="mat-right-con">
+        <div>
+          <h5>
+            <b style="color: #212529a1;">Tickets</b>
+          </h5>
+          <p class="mat-no">{{ticketcount}}</p>
+        </div>
+
+        <div>
+          <div class="text-center">
+            <button class="btn btn-default new-btn" (click)="newticket()">
+              <i class="fa fa-plus-circle" style="color: white"></i> New Ticket</button>
+          </div>
+          <div *ngFor='let ticketstatus of tstatus'>
+            <span class="badge bg-success badge3">Created-By:{{createdby}}</span>
+            <div *ngIf="ticketstatus === 'Open'">
+              <span class="badge bg-success badge1">{{ticketstatus}}--{{ticketdate|date:'MM/dd/yyyy'}}--{{user.firstname}}</span>
+            </div>
+            <div *ngIf="ticketstatus === 'Close'">
+              <span class="badge bg-success badge2">{{ticketstatus}}--{{ticketdate|date:'MM/dd/yyyy'}}--{{user.firstname}}</span>
+            </div>
+            <div *ngIf="ticketstatus === 'In Progress'">
+              <span class="badge bg-success badge2">{{ticketstatus}}--{{ticketdate|date:'MM/dd/yyyy'}}--{{user.firstname}}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-content *ngIf="ticketcount === 1" class="mat-right-con">
+        <div>
+          <h5>
+            <b style="color: #212529a1;">Tickets</b>
+          </h5>
+          <p class="mat-no">{{ticketcount}}</p>
+        </div>
+
+        <div>
+          <div class="text-center">
+            <button class="btn btn-default new-btn" (click)="newticket()">
+              <i class="fa fa-plus-circle" style="color: white"></i> New Ticket</button>
+          </div>
+          <div *ngFor='let ticketstatus of tstatus'>
+            <span class="badge bg-success badge3">Created-By:{{createdby}}</span>
+            <div *ngIf="ticketstatus === 'Open'">
+              <span class="badge bg-success badge1">{{ticketstatus}}--{{ticketdate|date:'MM/dd/yyyy'}}--{{createdby}}</span>
+            </div>
+            <div *ngIf="ticketstatus === 'Close'">
+              <span class="badge bg-success badge2">{{ticketstatus}}--{{ticketdate|date:'MM/dd/yyyy'}}--{{test}}</span>
+            </div>
+            <div *ngIf="ticketstatus === 'Assigned'">
+              <span class="badge bg-success badge2">{{ticketstatus}}--{{ticketdate|date:'MM/dd/yyyy'}}--{{test}}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+
+    </mat-card>
+
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-md-10 orderTicketText">Items included in this order</div>
+    <div *ngIf="showDetails" class="col-md-2" (click)="showDetails = false">
+      <u class="booleanDetails">Hide details</u>
+    </div>
+    <div *ngIf="!showDetails" class="col-md-2" style="margin-left:0%" (click)="showDetails = true">
+      <u class="booleanDetails">Show details</u>
+    </div>
+  </div>
+  <div class="ticket-container">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="Item">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Item </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.ItemNumber}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Style">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Style </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf="row.StyleNumber == null">-</span>
+          <span *ngIf="row.StyleNumber != null">{{row.StyleNumber}}</span>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Color">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>
+        <mat-cell *matCellDef="let row"> 
+          <span *ngIf="row.StyleColor == null">-</span>
+          <span *ngIf="row.StyleColor != null">{{row.StyleColor}}</span>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="style_option">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> StyleOption </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green">
+          <span *ngIf="row.StyleOption != null">{{row.StyleOption}}</span>
+          <span *ngIf="row.StyleOption == null">-</span>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Quantity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green"> 
+        <span *ngIf="row.QuantityRequested == null">-</span>
+        <span *ngIf="row.QuantityRequested != null">{{row.QuantityRequested}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green"> 
+          <span *ngIf="row.UnitPrice == null">-</span>
+          <span *ngIf="row.UnitPrice != null">{{row.UnitPrice}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ShippingMethod">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Shipping Method </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green"> 
+          <span *ngIf="row.shippingmethod != null">{{row.shippingmethod}}</span>
+          <span *ngIf="row.shippingmethod == null">-</span>
+          </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="ArtworkStatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Artwork Status </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf="row.SalesOrderDetails[0]?.ArtworkStatus != null">{{row.SalesOrderDetails[0]?.ArtworkStatus}}</span>
+          <span *ngIf="row.SalesOrderDetails[0]?.ArtworkStatus == null">-</span>
+          <!-- <span *ngIf="row.SalesOrderDetails.ArtworkStatus=='New'" class="badge bg-secondary" style="color:white">{{row.SalesOrderDetails.ArtworkStatus}}</span>
+          <span *ngIf="row.SalesOrderDetails.ArtworkStatus=='In Progress'" class="badge bg-success" style="color:white">{{row.SalesOrderDetails.ArtworkStatus}}</span>
+          <span *ngIf="row.SalesOrderDetails.ArtworkStatus=='Delayed'" class="badge bg-primary" style="color:white">{{row.SalesOrderDetails.ArtworkStatus}}</span>
+          <span *ngIf="row.SalesOrderDetails.ArtworkStatus=='Received'" class="badge bg-warning" style="color:white">{{row.SalesOrderDetails.ArtworkStatus}}</span> -->
+        </mat-cell>
+      </ng-container>
+
+
+
+      <!-- Expanded Content Column - The detail row is made up of this one column -->
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let detail" style="background-color: gainsboro;">
+          <div style="display:flex;vertical-align:middle">
+            <div style="padding:1%;width:67%">
+              <table cellspacing="10">
+                <tr class="header">
+                  <th>Description Summary</th>
+                  <th>Ship City</th>
+                  <th>Shipping Info / Address</th>
+                  <th>Quantity</th>
+                  <th>Color Description</th>
+                  <th>Size</th>
+                  <th>Color</th>
+                  <th>Waybill</th>
+                </tr>
+                <tbody class=tablebody>
+                  <tr *ngFor='let size of orderdetail'>
+                    <td class="content">{{size?.StyleName2}}</td>
+                    <td>
+                      <span *ngIf="Order.Shipments.length == 0">-</span>
+                      <span *ngIf="Order.Shipments.length != 0"> {{Order?.Shipments[0]?.ShipToCity}} </span>
+                    </td>
+                    <td>{{Order.ShipperNumber}}</td>
+                    <td>{{size?.RequestCount}}</td>
+                    <td>{{size?.StyleColorDescription2}}</td>
+                    <td>{{size?.GarmentSize}}</td>
+                    <td>{{size?.StyleColor2}}</td>
+                    <td>
+                      <span *ngIf="Order.Shipments.length == 0">-</span>
+                      <span *ngIf="Order.Shipments.length != 0"> {{Order?.Shipments[0]?.WayBill}} </span>
+                    </td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+            <div>
+              <button style="margin-top:50%" class="btn btn-default new-btn1" (click)="newticket()">
+                <i class="fa fa-plus-circle" style="color: white"></i> New Ticket</button>
+            </div>
+          </div>
+          <!-- <div class="ticketbutton">
+              <span><button class="btn btn-default new-btn1" (click)="newticket()">
+                  <i class="fa fa-plus-circle" style="color: white"></i> New Ticket</button></span>
+          </div> -->
+
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row style="width:100%" *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+
+      <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" (click)="Onclick(row)" [class.expanded]="expandedElement == row"
+        (click)="expandedElement = row"></mat-row>
+      <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow" [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+        style="overflow: hidden">
+      </mat-row>
+
+
+    </mat-table>
+    <mat-paginator class="custom-page" #paginator [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true">
+    </mat-paginator>
+
+
+
+  </div>
+
+
+
+</div>
+
+
+
+
+<!-- <mat-card class="mat-bottom">
+      <mat-card-content style="display:flex">
+        <div style="display:flex">
+           <div class="mat-img">
+           
+          </div> 
+       
+          <div class="mat-text1">
+             <p class="mat-bot-text"> Description Summary</p>             
+             <p class="mat-bot-text2">ATHLETICS JACKET</p>
+          </div>
+
+          <div class="mat-text2">
+              <p class="mat-bot-text">Shipping Info / Address</p>
+              <p class="mat-bot-text2">Joe Smith,2 Wellington,Nashville,TN,6321</p>
+          </div>
+        </div>
+
+        <div class="btn-psn">
+            <button class="btn btn-default new-btn2">New Ticket +</button>
+        </div>
+      </mat-card-content>
+    </mat-card> -->

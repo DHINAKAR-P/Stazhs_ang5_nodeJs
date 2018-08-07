@@ -1,0 +1,106 @@
+.badge{
+    border-radius: unset;
+    width: 77%;
+    height: 22px;
+  }
+
+  .orange{
+      color: white;
+      background-color:#ff9900; 
+  }
+
+  .txtcolor{
+    color: rgb(127, 140, 141);
+    font-weight: 100;
+    border: none;
+    margin-top: 2%;
+    margin-left: 1%;
+  }  
+  
+  .green {
+    color : white;
+    background-color: #009900;
+  }
+  .blue {
+      color:white;
+      background-color: blue;
+  }
+  
+  .searchbar{
+    height: 10%;
+    width: 100%;
+    border-radius: 1px;
+    /* border-color: black; */
+    /* border-style: solid; */
+    border-width: 1px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: 0%;
+}
+
+.searchbox{
+    margin-bottom: -4%;
+    margin-left: 2%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 'regular';
+    font-size: 18px;
+    color:#ccc;
+  }
+  .pull-right{
+    margin-left: 60%;
+    margin-top: -4%;
+  }
+.filterName {
+    margin-right: 10px;
+}
+.locationField {
+    width: 5em;
+}
+.customerField{
+    width: 6em;
+}
+.orderStatusField {
+    width: 7em;
+}
+.faStyle{
+    color: rgb(127, 140, 141);
+}
+.mat-table{
+    overflow-y: hidden;
+  }
+ 
+@media only screen and (max-width: 800px) and (min-width: 375px) {
+    .pull-right {
+        margin-left: 7%;
+        margin-top: 2%;
+    }
+    .searchPurchaseDiv {
+        margin-left: 17%;
+    }
+  }
+  
+  @media only screen and (width: 1024px) {
+    .pull-right {
+        margin-left: 51%;
+    } 
+}
+  
+  @media only screen and (width: 768px) {
+    .pull-right {
+        margin-left: 40%;
+        margin-top: -6%;
+    }
+    .searchPurchaseDiv {
+        margin-left: -2%;
+    }
+  }
+  
+  @media only screen and (max-width: 375px) {
+    .pull-right {
+        margin-left: 7%;
+        margin-top: -1%;
+    }
+    .searchPurchaseDiv {
+        margin-left: 13%;
+    }
+  }

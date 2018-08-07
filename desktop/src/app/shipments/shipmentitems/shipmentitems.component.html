@@ -1,0 +1,55 @@
+<app-sidenav></app-sidenav>
+<div class="container">
+  <div>
+    <a class="bread-crumb" [routerLink]="['/shipments']">Shipments</a> > Shipment Items
+  </div>
+  <br>
+  <h1>
+    <span class="title">
+      <b>Shipment Items Summary</b>
+    </span>
+  </h1>
+  <br>
+  <div class="ticket-container mat-elevation-z8 col-xs-12">
+    <mat-table [dataSource]="dataSource" matSort matSortActive="ShipNumber" matSortDirection="desc" matSortDisableClear>
+      <ng-container matColumnDef="ShipNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ShipNumber </mat-header-cell>
+        <mat-cell style="color: blue;cursor: pointer" *matCellDef="let row"> {{row.ShipNumber}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="StyleNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> StyleNumber </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{row.StyleNumber}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="StyleColor">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> StyleColor </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.StyleColor}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="GarmentSize">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> GarmentSize </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green">
+          {{row.GarmentSize}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="StyleOption">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> StyleOption </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <p *ngIf="row.StyleOption!=null || row.StyleOption!=''">{{row.StyleOption}}</p>
+          <p *ngIf="row.StyleOption==null || row.StyleOption==''">-</p>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Quantity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="blue">
+          {{row.Quantity}}
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row (click)="onRowSelected(row)" *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>

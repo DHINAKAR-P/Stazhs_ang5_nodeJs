@@ -1,0 +1,103 @@
+<app-sidenav></app-sidenav>
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-11">
+      <h1>Users</h1>
+    </div>
+    <div class="col-lg-1 new-btn">
+      <button mat-raised-button color="primary" [routerLink]="['/new-user']"><i class="fas fa-plus-circle"></i> New User</button>
+    </div>
+
+  </div>
+
+  <mat-card class="searchbar">
+      <div>
+        <span class="fa fa-search faStyle"></span>
+        <input class="txtcolor" type="search" placeholder="Search" (keyup)="applyFilter($event.target.value)">
+      </div>
+  
+      <div class="pull-right">
+        
+        <i class="filterName">Filter By</i>
+       
+        <span>
+          <mat-form-field class="locationField">
+            <mat-select placeholder="Organization" multiple [formControl]="selectfilter" (change)="OrgFilter()">
+              <mat-option *ngFor="let Organization of filter_Organization" [value]="Organization">{{Organization}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ticketField">
+            <mat-select placeholder="Role" multiple [formControl]="selectfilter" (change)="RoleFilter()">
+                <mat-option *ngFor="let Role of filter_Role" [value]="Role">{{Role}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+        </span>
+      </div>
+      
+  </mat-card>
+    <br> 
+
+  <div>
+    <div class="ticket-container mat-elevation-z8 col-xs-12">
+
+      <mat-table [dataSource]="dataSource" matSort>
+        <!-- <ng-container matColumnDef="avatar">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <ngx-avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKmAU1sHMatl9womt5WsbdYdbFohpxk-jQHWJBRuCZU2bC36N0"
+              [round]="true">
+            </ngx-avatar>
+          </mat-cell>
+        </ng-container> -->
+
+        <ng-container matColumnDef="Name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.firstname}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Lastname">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{row.lastname}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+        </ng-container>
+
+       
+
+        <ng-container matColumnDef="Rol">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Rol </mat-header-cell>
+          <mat-cell *matCellDef="let row" [style.color]="green"> <span *ngIf="row.Authorities.length > 0">{{row.Authorities[0].role}}</span>  </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Organisation">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Organisation </mat-header-cell>
+          <mat-cell *matCellDef="let row" [style.color]="green"> 
+           <span *ngIf="row.organization != null">{{row.organization?.organizationname}} </span>
+           <span *ngIf="row.organization == null"> - </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Actions">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <i class="fa fa-pencil-alt" (click)="handleUserEdit(row)" aria-hidden="true"></i>
+            <i class="fa fa-trash" (click)="openDialog(row)" aria-hidden="true"></i>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+      <mat-paginator #paginator class="ticketPagination" [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </div>
+    <br>
+    <button mat-raised-button color="primary" [routerLink]="['/user-roles']">User Roles</button>
+  </div>

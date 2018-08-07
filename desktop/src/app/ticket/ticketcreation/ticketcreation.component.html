@@ -1,0 +1,145 @@
+<app-sidenav></app-sidenav>
+<div class="container">
+  <h1>
+    <span class="title">
+      <b>Ticket Creation</b>
+    </span>
+  </h1>
+  <div class="row">
+    <mat-button-toggle-group class="buttonGroup" [(ngModel)]="ticket.Type">
+      <mat-button-toggle class="regularToggle" value="Regular">Regular</mat-button-toggle>
+      <mat-button-toggle class="urgentToggle" value="Urgent">Urgent</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="row orders">
+    Orders included:
+    <span *ngIf="!displayAdded">&nbsp;0</span>
+    <div *ngIf="displayAdded">
+      <span class="lastSpan" *ngFor="let item of selectedTableValue">&nbsp;{{item.OrderNumber}}&nbsp;</span>
+    </div>
+    <!-- <div *ngIf="displayAdded">
+    <span class="lastSpan">&nbsp;{{orderid}}&nbsp;</span>
+    </div> -->
+  </div>
+  <div class="row searchFullDiv">
+    <div class="search">
+      <span class="fa fa-search faStyle"></span>
+      <mat-form-field class="example-full-width searchbox">
+        <input matInput type="search" placeholder="Search" (keyup)="applyFilter($event.target.value)">
+      </mat-form-field>
+    </div>
+    <!-- <div class="buttonDiv">
+      <button mat-raised-button (click)="addItems()" class="addButton">Add</button>
+    </div> -->
+  </div>
+  <br>
+  <div class="ticket-container mat-elevation-z8 col-xs-12">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="Number">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Number </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.OrderNumber}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Location">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <p *ngIf="row.CompanyCode!=null || row.CompanyCode!=''">{{row.CompanyCode}}</p>
+          <p *ngIf="row.CompanyCode==null || row.CompanyCode==''">-</p>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox [checked]="isSelected(row.OrderID)" (click)="$event.stopPropagation()" (change)="$event ? toggle(row) : null">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="PO#">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> PO# </mat-header-cell>
+        <mat-cell *matCellDef="let row"> 
+          <div *ngIf="row.PONumber == null">-</div>
+          <div *ngIf="row.PONumber != null">{{row.PONumber}}</div>
+           </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Requested">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Requested </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green"> 
+          <div *ngIf="row.RequiredDate == null">-</div>
+          <div *ngIf="row.RequiredDate != null"> {{row.RequiredDate | date:'MM/dd/yyyy'}}</div>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <!-- <span *ngIf="row.StatusName=='New'" class="badge blue">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName=='In Progress'" class="badge green">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName=='Complete'" class="badge blue">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName=='Delayed'" class="badge orange">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName=='Void'" class="badge dark">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName=='Shipped'" class="badge brown">{{row.StatusName}}</span> -->
+          <span *ngIf="row.StatusName ==='Processed'" class="badge grey">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='New'" class="badge grey">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Incomplete'" class="badge orange">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Void'" class="badge orange">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Complete'" class="badge green">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Shipped'" class="badge light blue">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Released'" class="badge light blue">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Hold'" class="badge light blue">{{row.StatusName}}</span>
+          <span *ngIf="row.StatusName ==='Committed'" class="badge green">{{row.StatusName}}</span>
+
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Tickets">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tickets </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green">
+          <span *ngIf="row.Tickets != null">{{row.Tickets}}</span>
+          <span *ngIf="row.Tickets == null">0</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Forecasted">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Forcasted </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="blue">
+          <div *ngIf="row.ForecastFinish == null"> - </div> 
+        <div *ngIf="row.ForecastFinish != null">{{row.ForecastFinish}} </div></mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator class="saveTicketPagination" #paginator [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+  <div class="row textAreaDiv">
+
+    <mat-form-field class="textAreaField" appearance='outline'>
+      <textarea matInput rows="5" [(ngModel)]='ticket.description' placeholder="Please describe with details what is happening with this order/group of orders"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div class="uploadFileDiv">
+      <div class="upload">
+        <button (click)="fileInput.click()" class="btn btn-default button">Upload</button>
+        <span style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height:0px;border:none;margin:0; padding:0">
+          <input type="file" #fileInput ng2FileSelect [uploader]="uploader" multiple/>
+        </span>
+        <span *ngIf="uploader.queue.length !== 0"> &nbsp;&nbsp;{{uploader.queue.length}} files</span>
+      </div>
+    </div>
+
+    <div class="saveTicketDiv">
+      <button mat-raised-button class="saveButton" [disabled]="ticket.Type === '' || ticket.description === '' "  (click)="saveTicket()">Create Ticket</button>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>

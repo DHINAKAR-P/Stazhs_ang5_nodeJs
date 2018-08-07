@@ -1,0 +1,25 @@
+.actiontext{
+    color: blue
+}
+
+.new-btn{
+    margin-left: -2.5%;
+}
+
+
+@media only screen and (max-width: 1024px) and (min-width: 1000px) {
+.new-btn {
+    margin-left: -6%;
+}
+
+
+}
+
+@media only screen and (max-width: 768px) {
+.new-btn
+{
+    margin-left: 83%;
+    margin-bottom: 3%;
+}
+
+}

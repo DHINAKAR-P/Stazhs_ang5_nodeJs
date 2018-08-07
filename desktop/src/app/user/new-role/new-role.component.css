@@ -1,0 +1,10 @@
+.body{
+    margin-top: 3%
+}
+.warningmsg{
+    color: red;
+    font-size: 14px;
+}
+.uppercase{
+    text-transform: uppercase
+}

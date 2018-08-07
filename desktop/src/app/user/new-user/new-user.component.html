@@ -1,0 +1,76 @@
+<app-sidenav></app-sidenav>
+<div class="container" style="text-align: center; padding: 20px 10%">
+    <div class="row">
+        <div class="col-lg-11">
+            <h2 *ngIf="!update">Add New User</h2>
+            <h2 *ngIf="update">Update User Details</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <mat-form-field>
+                <input matInput placeholder="Enter your firstname" (keypress)="omit_special_char($event)" [(ngModel)]='users.firstname' required>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <mat-form-field>
+                <input matInput placeholder="Enter your lastname" (keypress)="omit_special_char($event)" [(ngModel)]='users.lastname' required>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <mat-form-field>
+                <input matInput type='email' [formControl]="email" placeholder="Enter your email" [(ngModel)]='users.email' required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <mat-form-field>
+                <input matInput placeholder="Enter your username" (keypress)="omit_special_char($event)" [(ngModel)]='users.username' (ngModelChange)="textChanged()"
+                    required>
+            </mat-form-field>
+        </div>
+        <span *ngIf="duplicateuser" class="warningmsg">UserName Already Exists</span>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <mat-form-field>
+                <input matInput type="password" placeholder="Enter your password" [(ngModel)]='users.password' required>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row" *ngIf="adminrole">
+        <div class="col-lg-4 col-lg-offset-4">
+            <mat-form-field>
+                <mat-select placeholder="Select Organisation" [(ngModel)]='organization' (ngModelChange)="organizationchanged($event)" required>
+                    <mat-option *ngFor="let rl of organizationlist" [value]="rl" >{{rl.organizationname}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div   class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <mat-form-field>
+                <mat-select placeholder="Select role" [(ngModel)]='assignedRole' required>
+                    <mat-option *ngFor="let rl of role" [value]="rl">{{rl.role}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+        </div>
+        <div class="col-lg-4">
+            <button mat-raised-button disabled *ngIf="!update" [disabled]="users.firstname.length === 0 || users.lastname.length === 0 || users.username.length === 0 || users.password.length === 0 || users.email.length === 0 || !organization || email.invalid || !assignedRole || duplicateuser"
+                color="primary" (click)="createUser()">Save</button>
+            <button mat-raised-button *ngIf="update" [disabled]="users.firstname.length === 0 || users.lastname.length === 0 || users.username.length === 0 || users.password.length === 0 || users.email.length === 0 || email.invalid ||!organization || !assignedRole || duplicateuser"
+                color="primary" (click)="updateUser()">Update</button>
+            <button mat-raised-button color="warn" [routerLink]="['/users']">Cancel</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<app-sidenav></app-sidenav>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-11">
+      <h1>Organization</h1>
+    </div>
+
+  </div>
+  <br>
+  <div>
+    <div class='pull-right'>
+      <div class="col-sm-1 button">
+        <button mat-raised-button color="primary" [routerLink]="['/create-org']">
+          <i class="fas fa-plus-circle"></i> New Organization</button>
+      </div>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+      <ng-container matColumnDef="Id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header='id'> Id </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Organization">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Organization </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.organizationname}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <i class="fa fa-pencil-alt" (click)='Updateorganization(row)' style="cursor: pointer;" aria-hidden="true"></i>
+          <i class="col-lg-3 fa fa-trash" (click)="Opendialog(row)" style="cursor: pointer;" aria-hidden="true"></i>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+
+    <mat-paginator [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true" ></mat-paginator>
+  </div>
+
+</div>

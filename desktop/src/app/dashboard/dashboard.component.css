@@ -1,0 +1,157 @@
+.day-dropdown{
+    float: right;
+    margin-top: -4%;
+}
+
+.day-dropdown2{
+    float: right;
+    margin-top: -11%;
+    width: 30%
+}
+
+.top-count{
+    position: absolute;
+    left: 86%;
+    top: 12%;
+}
+
+.percent-cir{
+    margin-left: -24%;
+    /* margin-bottom: -39%; */
+    font-size: 75%;
+    left: 13%;
+}
+
+.container-search{
+    width: 300px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+  }
+.box{
+    margin-left: 98%;
+    margin-top: -11%;
+}
+
+.textFont {
+    font-size: 16px;
+    color: #333333;
+    font-weight: bold;
+    font-family: open sans;
+    cursor: pointer;
+    width: 100%
+}
+
+.bell-icon{
+    color: white;
+    margin-left: 82%;
+}
+
+.search-icon{
+    margin-left: -9%;
+    margin-top: 4%; 
+    color:#63717f
+}
+  .container-search input#search{
+    width: 226px;
+    height: 40px;
+    background: rgba(67, 79, 90, 0.73);
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #63717f;
+    padding-left: 45px;
+    border-radius: 23px;
+  }
+
+.dash-header{
+    padding-bottom: 1%;
+    background:none;
+    margin-top: -4%;
+}
+
+.dash-header-text{
+ /* color: white; */
+ font-weight: bold;
+ font-size: 108%;
+ margin-left: 2%
+}
+
+.top-right{
+    float: right;
+    margin-top: -2%;
+    /* margin-left: -6%; */
+    margin-right: 18%;
+}
+
+.mat-dashboard{
+    /* background: rgb(33, 44, 53) */
+    background: #F1F3F5
+}
+
+.first-card{
+    background:#cccccc;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.third-card{
+    background:#cccccc;
+    border-radius: 7px;
+    height: 450px;
+}
+
+.header-text{
+ /* color: white; */
+ font-weight: bold;
+ margin-bottom: 1%;
+}
+
+.pg-point{
+    font-size: 166%;
+    float: right;
+    /* color: white; */
+    margin-top: -13%;
+}
+
+.pg-text{
+    font-size: 80%;
+    float: right;
+    /* color: white; */
+    margin-top: -7%;
+}
+
+.pg-text2{
+    font-size: 80%;
+    float: right;
+    /* color: white; */
+    margin-top: 10%;
+    /* margin-left: -56%; */
+    margin-right: 39%;
+}
+
+.pgbar-point{
+    font-size: 166%;
+    float: right;
+    /* color: white; */
+    margin-top: 2%;
+}
+
+.pgbar-text{
+    font-size: 80%;
+    float: right;
+    /* color: white; */
+    margin-top: 13%;
+    margin-right: -25%;
+}
+.container-height{
+    height: 120px;
+}
+.regular{
+    background: white
+}
+.mat-table{
+    background: #ccc;
+}
+.mat-paginator {
+    background: #ccc;
+}

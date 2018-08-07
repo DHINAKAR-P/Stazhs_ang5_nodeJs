@@ -1,0 +1,36 @@
+.userlink {
+    text-decoration-color: mediumblue;
+    text-decoration:underline;
+}
+
+.title{
+    position: absolute;
+    margin-left: 31%;
+    width: 10%;
+    margin-top: 12%;
+}
+
+.text-content{
+    position: relative;
+    margin-top: 20%;
+    left: 30%;
+    width: 60%;
+}
+
+.text2{
+    margin-left: 7%;
+}
+
+
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+    .text-content{   
+        left: 20%;       
+    }
+  }
+
+
+  @media only screen and (max-width: 600px) and (min-width: 360px) {
+    .text2{
+        margin-left: 0%;
+    }
+    }

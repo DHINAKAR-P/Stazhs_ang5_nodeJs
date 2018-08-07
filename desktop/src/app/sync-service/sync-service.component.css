@@ -1,0 +1,12 @@
+.orderTicketText {
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+  .form-txt{
+   margin-left: 12%
+  }
+
+  mat-slider {
+    width: 300px;
+  }

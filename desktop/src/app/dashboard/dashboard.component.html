@@ -1,0 +1,233 @@
+<app-sidenav></app-sidenav>
+<br>
+<div class="dash-header">
+    <p class="dash-header-text">APPAREL GROUP DASHBOARD</p>
+</div>
+
+<section>
+
+    <div class="container-fluid mat-dashboard">
+        <div *ngIf="allowedScreens.indexOf('Orders') > -1">
+            <div class="row">
+                <div class="col-lg-4">
+                    <mat-card class="card first-card" (click)="barOrderReceived()"> 
+
+                        <mat-card-content class="container-height">
+                            <p class="header-text textFont"> ORDERS RECEIVED</p>
+                         <span *ngIf="orderReceivedToday !==0" >   
+                            <circle-progress [percent]="orderReceivedPercent" [outerStrokeColor]="'blue'"></circle-progress>
+                            <span class="percent-cir">{{orderReceivedPercent}}%</span>
+                            <div class="pull-right" style="margin-top: -22%;">
+                                <span class="pg-point">{{orderReceivedToday}}</span>
+                                <br>
+                                <span class="pg-text">Orders Received Today</span>
+                            </div>
+                        </span> <div *ngIf="orderReceivedToday ===0" class="pg-text2">No data for Today!</div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-lg-4">
+                    <mat-card class="card first-card" (click)="barOrderShipped()">
+                        <mat-card-content class="container-height">
+                            <p class="header-text textFont"> ORDERS SHIPPED</p>
+                           
+                            <span *ngIf="orderShippedToday !==0" >  
+                            <span class="badge badge-pill badge-success" style="margin-top: 14%;">{{orderShippedPercent}}%</span>
+                            <mat-progress-bar mode="determinate" value={{orderShippedPercent}} color="Primary" style="margin-top: 5%;"></mat-progress-bar>
+                            <div class="pull-right" style="margin-top: -17%;">
+                                <span class="pg-point">{{orderShippedToday}}</span>
+                                <br>
+                                <span class="pg-text">Orders Shipped Today</span>
+                            </div>
+                          </span> <div *ngIf="orderShippedToday ===0" class="pg-text2">No data for Today!</div>  
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+                <div class="col-lg-4" id="prg3">
+                    <mat-card class="card first-card" (click)="onTimeGraph()">
+                        <mat-card-content class="container-height">
+                            <p class="header-text textFont"> ON-TIME %</p>
+                            <span *ngIf="orderOnTimeToday !==0" > 
+                            <circle-progress [percent]="orderOnTimePercent" [outerStrokeColor]="'green'"></circle-progress>
+                            <span class="percent-cir">{{orderOnTimePercent}}%</span>
+                            <div class="pull-right" style="margin-top: -22%;">
+                                <span class="pg-point">{{orderOnTimeToday}}</span>
+                                <br>
+                                <span class="pg-text">Orders OnTime Today</span>
+                            </div>
+                        </span> <div *ngIf="orderOnTimeToday ===0" class="pg-text2">No data for Today!</div>   
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <mat-card class="card first-card">
+                        <mat-card-content *ngIf="showGraph==='received'">
+                           <span class="header-text textFont">
+                                <strong>ORDERS RECEIVED BY DAY</strong>
+                           </span>
+
+                            <mat-form-field class="day-dropdown">
+                                <mat-select placeholder="Select Days" (change)="barOrderReceived()" [(ngModel)]="barGraphDays">
+                                 <mat-option *ngFor="let days of barGraphDaysArr" [value]="days">{{days}}</mat-option>         
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div id="container2">
+                            </div>
+                        </mat-card-content>
+
+                        <mat-card-content *ngIf="showGraph==='shipped'">
+                                <span class="header-text textFont">
+                                    <strong>ORDERS SHIPPED BY DAY</strong>
+                                </span>
+
+                                <mat-form-field class="day-dropdown">
+                                    <mat-select placeholder="Select Days" (change)="barOrderShipped()" [(ngModel)]="barGraphDays">
+                                     <mat-option *ngFor="let days of barGraphDaysArr" [value]="days">{{days}}</mat-option>         
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <div id="container2">
+                                </div>
+                        </mat-card-content>
+
+                        <mat-card-content *ngIf="showGraph==='ontime'">
+                            <span class="header-text textFont">
+                                <strong>ORDERS ON-TIME BY DAY</strong>
+                            </span>
+
+                            <mat-form-field class="day-dropdown">
+                                <mat-select placeholder="Select Days" (change)="onTimeGraph()" [(ngModel)]="onTimeDays">
+                                 <mat-option *ngFor="let days of onTimeDaysArr" [value]="days">{{days}}</mat-option>         
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div id="container2">
+                            </div>
+                        </mat-card-content>
+
+                    </mat-card>
+                </div>
+                <div class="col-sm-6">
+                    <mat-card class="card first-card">
+                        <mat-card-content>
+                            <span class="header-text textFont">
+                                <strong>ACTUAL vs FORCASTED</strong>
+                            </span>
+
+                            <mat-form-field class="day-dropdown">
+                                <mat-select placeholder="Select Days" (change)="timeGraph()" [(ngModel)]="timeGraphDays">
+                                 <mat-option *ngFor="let days of timeGraphDaysArr" [value]="days">{{days}}</mat-option>         
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div id="container3">
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- <div class="col-lg-4 " *ngIf="allowedScreens.indexOf('Inventory') > -1"> -->
+                <mat-card class="card third-card">
+                    <mat-card-content>
+                        <p class="header-text textFont" style="margin-bottom:-3%;width:45%">
+                            <strong>Top Selling Design</strong>
+                        </p>
+                       
+                        <mat-form-field class="day-dropdown2">
+                            <mat-select placeholder="Select Days" (change)="getTopSelling()" [(ngModel)]="topSellingDays">
+                             <mat-option *ngFor="let days of topSellingDaysArr" [value]="days">{{days}}</mat-option>         
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-list role="list">
+                            <mat-list-item role="listitem" *ngFor="let top of topSelling" style="color:none">
+                                <p>{{top.name}}</p>
+                                <p class="top-count">{{top.count}}</p>
+                            </mat-list-item>
+                        </mat-list>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-lg-8 " id="prg3">
+                <mat-card class="card third-card">
+                    <mat-card-content>
+                        <p class="header-text textFont" style="width:50%">
+                            <strong>Priority Ticket Status</strong>
+                        </p>
+                        <mat-form-field style="margin-top: -6%;" class="day-dropdown">
+                            <mat-select placeholder="Select Days" (change)="priorityticket()" [(ngModel)]="ticketDays">
+                             <mat-option *ngFor="let days of ticketDaysArr" [value]="days">{{days}}</mat-option>         
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                       
+                        <mat-table [dataSource]="dataSource" matSort>
+
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="Ticket Id">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Ticket Id </mat-header-cell>
+                              <mat-cell style="color:blue;cursor: pointer;"*matCellDef="let row"> {{row.id}} </mat-cell>
+                            </ng-container>
+                        
+                            <!-- Progress Column -->
+                            <ng-container matColumnDef="Date">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+                              <mat-cell *matCellDef="let row"> {{row.Date | date:'MM/dd/yyyy'}} </mat-cell>
+                            </ng-container>
+                        
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="Status">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                              <mat-cell *matCellDef="let row"> {{row.Status}} </mat-cell>
+                            </ng-container>
+                        
+                            <!-- Color Column -->
+                            <ng-container matColumnDef="Type">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+                              <mat-cell *matCellDef="let row" > {{row.Type}} </mat-cell>
+                            </ng-container>
+                        
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row (click)="onRowSelected(row)"  *matRowDef="let row; columns: displayedColumns;">
+                            </mat-row>
+                          </mat-table>
+                        
+                          <mat-paginator [pageSize]="5"></mat-paginator>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <br>
+    </div>
+</section>
+
+<script>
+
+    var ctxD = document.getElementById("doughnutChart").getContext('2d');
+    var myLineChart = new Chart(ctxD, {
+        type: 'pie',
+        data: {
+            labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+            datasets: [
+                {
+                    data: [300, 50, 100, 40, 120],
+                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+                }
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>

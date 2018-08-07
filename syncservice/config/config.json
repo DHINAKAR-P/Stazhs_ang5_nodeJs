@@ -1,0 +1,44 @@
+{
+    "dumpDb": {
+        "host": "stahlsnonproduction.database.windows.net",
+        "port": "1433",
+        "username": "stahlsadmin",
+        "password": "T@ng3456!.",
+        "dialect": "mssql",
+        "name": "StahlsTest",
+        "dialectOptions": {
+            "encrypt": true,
+            "requestTimeout":3600000
+        },
+        "autoreconnect": true,
+        "pool":{
+          "max":15,
+          "min":0,
+          "idle": 3600000,
+          "acquire": 3600000
+        }
+    },
+    "production": {
+        "host": "stahlsnonproduction.database.windows.net",
+        "port": "1433",
+        "username": "stahlsadmin",
+        "password": "T@ng3456!.",
+        "dialect": "mssql",
+        "name": "StahlsTest",
+        "dialectOptions": {
+            "encrypt": true,
+            "requestTimeout":3600000
+        },
+        "autoreconnect": true,
+        "pool":{
+          "max":15,
+          "min":0,
+          "idle": 3600000,
+          "acquire": 3600000
+        }
+    },
+    "uploadlocation": "/opt/stahlsdata/",
+    "fileUploadLocation":"./uploads",
+    "orderCount":2
+}
+

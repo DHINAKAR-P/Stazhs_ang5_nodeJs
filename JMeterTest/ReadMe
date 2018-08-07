@@ -1,0 +1,11 @@
+
+
+Following Instruction to generate Report using Terminal
+
+<Jmeter_Location>/apache-jmeter-4.0/bin/jmeter.sh -g <result_Stored_Location>/<filename.csv> -o <OutputLocation_to_StoreGeneratedReport>
+
+example :- ~/Downloads/apache-jmeter-4.0/bin/jmeter.sh -g output/result.csv -o  testreport/
+
+
+
+

@@ -1,0 +1,166 @@
+.buttonGroup {
+    margin-left: 32%;
+    width: 32%;
+}
+.defaultLine{
+    margin-left: 6%;
+    font-family: open sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 2%;
+}
+.faStyle{
+    color: rgb(127, 140, 141);
+  }
+
+  .search {
+    display: -webkit-box;
+  }
+  .orders {
+    margin-left: 6%;
+    color: #00a3ff;
+  }
+  .buttonDiv {
+    align-self: center;
+    padding-left: 2%;
+  }
+  .addButton {
+      color:white;
+      background-color: #048504
+  }
+  .searchFullDiv {
+    margin-top: 3%;
+    margin-left: 62%;
+  }
+  .upload{
+    /* border-style:solid; */
+    border-radius: 5px;
+    border-width: thin;
+    padding: 5px 10px;
+  }
+  .button{
+    margin-top: 2%;
+    margin-bottom: 3%;
+    margin-left: -1%;
+    margin-right: 0%;
+  }
+  .btn{
+    background-color: #DDD;
+  }
+  .textAreaDiv {
+    margin-top: 2%;
+  }
+  .textAreaField {
+    width: 100%;
+  }
+  .regularToggle{
+    width: 50%;
+    text-align: center;
+    border-right: 1px solid #afa0a2;
+    color: black;
+  }
+  .urgentToggle{
+    width: 50%;
+    text-align: center;
+    color: black;
+  }
+
+  .mat-button-toggle-checked{
+    background-color: #1288ff;
+  }
+
+  .blue {
+    color:white;
+    background: #0066cc
+  }
+  .green {
+    color : white;
+    background-color: #009900;
+  }
+  .orange {
+    color:white;
+    background-color: #ff9900
+  }
+  .dark {
+    color:white;
+    background-color: #003366
+  }
+  .brown {
+    color:white;
+    background-color: #666666;
+  }
+
+  .saveTicketDiv {
+    left: 78%;
+    position: relative;
+  }
+
+  .saveButton {
+    background-color: blue;
+    color: white;
+    font-weight: 900;
+    margin-left: -80%;
+  }
+
+  .uploadFileDiv {
+    margin-left: 2%;
+  }
+
+  .mat-table{
+    overflow-y: hidden;
+    display: initial;
+  }
+  
+  .ticket-container {
+    background-color: white;
+  
+  }
+
+  @media only screen and (width: 1024px) {
+       
+  }
+  
+
+  @media only screen and (width: 768px) {
+    .searchFullDiv{
+     margin-left: 57%;
+    }
+    .saveTicketDiv {
+     left: 70%;
+ }
+ .buttonGroup {
+   margin-left: 26%;
+}
+}
+
+  @media only screen and (max-width: 700px) and (min-width: 375px) {
+    .saveTicketDiv {
+      left: 50%;
+    } 
+    .buttonGroup {
+      margin-left: 23%;
+      width: 44%;
+  }
+  .searchFullDiv {
+    margin-top: 3%;
+    margin-left: 22%;
+}  
+.mat-paginator-page-size {
+  margin-right: 0px !important;
+}
+  }
+  @media only screen and (max-width: 375px) {
+    .saveTicketDiv{
+      left: 42%;
+    }
+    .searchFullDiv {
+      margin-left: 3%;
+    }
+    .buttonGroup {
+      margin-left: 22%;
+      width: 188px;
+    }  
+  }
+  
+ 
+ 

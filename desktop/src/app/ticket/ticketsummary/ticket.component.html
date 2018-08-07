@@ -1,0 +1,176 @@
+<app-sidenav></app-sidenav>
+<div class="container">
+  <h1>
+    <span class="title">
+      <b>Tickets Summary</b>
+    </span>
+  </h1>
+  <div>
+    <mat-card class="searchbar row">
+      <div>
+        <span class="fa fa-search faStyle"></span>
+        <input class="txtcolor " type="text" placeholder="Search" [(ngModel)]="searchtext" (keyup)="applyFilter($event.target.value)">
+        <span  class="fa fa-caret-down fa-lg" (click)="searchmodel()"></span>
+        <div *ngIf="search"class="description-drop" >
+          <!-- <label>Description</label>
+          <br/>
+          <input class="inputtext" type="text" oninput="this.value" [(ngModel)]="description.text" (ngModelChange)="Descriptionsearch($event)"/>
+          <br/> -->
+          <label class="searchlabel" >PONumber:</label>
+          <input class="inputtext" type="text" oninput="this.value" [(ngModel)]="description.number" (ngModelChange)="Ponumbersearch($event)"/>
+          <br/>
+          <br/>
+          <label class="searchlabel" >OrderNumber:</label>
+          <input class="inputtext" type="text" oninput="this.value" [(ngModel)]="description.ordernumber" (ngModelChange)="Ordernumbersearch($event)"/>
+          <br/>
+          <br/>
+          <label class="searchlabel" >Created_Date:</label>
+          <input class="inputtext" type="text" oninput="this.value" [(ngModel)]="description.date" (ngModelChange)="datesearch($event)"/>
+          <br/>
+          <br/>
+          <label class="searchlabel" >Created_By_Name:</label>
+          <input class="inputtext" type="text" oninput="this.value" [(ngModel)]="description.created" (ngModelChange)="createdbysearch($event)"/>
+          <br/>
+          <br/>
+          <label class="searchlabel" >Assigned_To_Name:</label>
+          <input class="inputtext" type="text" oninput="this.value" [(ngModel)]="description.assigned" (ngModelChange)="assignedtosearch($event)"/>
+        </div>
+      </div>
+
+      <div class="pull-right">
+        <i class="filterName">Filter by</i>
+        <span>
+
+          <mat-form-field class="assignedToField" *ngIf="showOrgFilter">
+            <mat-select (change)="organizationFilter()" placeholder="Organization" multiple [formControl]="selectfilter">
+              <mat-option *ngFor="let organization of filter_ticketOrganization" [value]="organization">{{organization}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="CreatedByField">
+            <mat-select (change)="createByFilter()" placeholder="Created by" multiple [formControl]="selectfilter">
+              <mat-option *ngFor="let created_By of filter_ticketCreated_By" [value]="created_By">{{created_By}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field class="assignedToField">
+            <mat-select (change)="assignedToFilter()" placeholder="Assigned to" multiple [formControl]="selectfilter">
+              <mat-option *ngFor="let Assigned_To of filter_ticketAssigned_To" [value]="Assigned_To">{{Assigned_To}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+          <mat-form-field class="statusField">
+            <mat-select (change)="statusFilter()" placeholder="Status" multiple [formControl]="selectfilter">
+              <mat-option *ngFor="let Status of filter_ticketStatus" [value]="Status">{{Status}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </span>
+
+      </div>
+    </mat-card>
+  </div>
+  <br>
+
+  <div class="text-center">
+    <button class="btn btn-primary" [routerLink]="['/ticketcreation']">
+      <i class="fa fa-plus-circle" style="color: white"></i> New Ticket</button>
+  </div>
+
+  <br>
+  <div class="ticket-container mat-elevation-z8 col-xs-12">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="Id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Number </mat-header-cell>
+        <mat-cell class="rowUUID" *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="PONumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> PONumber </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="emptyRowValues" *ngIf="row.PONumberList?.length === 0">--</div>
+          <div *ngFor="let PONumber of row.PONumberList">{{PONumber}}</div>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Created date </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{row.Date | date:'MM/dd/yyyy'}}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Order_number">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Order number </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="emptyRowValues" *ngIf="row.orderNumberList?.length === 0"> -</div>
+          <div *ngFor="let orderNumber of row.orderNumberList">
+            {{orderNumber}}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Created_By">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Created by </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green">
+          <div *ngIf="row.createdByUuid === null">
+            -
+          </div>
+          <div *ngIf="row.createdByUuid !== null">
+            {{row.createdByName}}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="organization">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green"> {{row.Company}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Assigned_To">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Assigned to </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green">
+          <div *ngIf="row.assignedToName?.length === 0">
+            -
+          </div>
+          <div *ngIf="row.assignedToName?.length != 0">
+            <div *ngFor="let assignedToName of row.assignedToName">
+              {{assignedToName}}
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="green"> {{row.type}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf="row.status=='Open'" class="badge bg-secondary" style="color:white">{{row.status}}</span>
+          <span *ngIf="row.status=='New'" class="badge bg-secondary" style="color:white">{{row.status}}</span>
+          <span *ngIf="row.status=='in progress'" class="badge bg-success" style="color:white">{{row.status}}</span>
+          <span *ngIf="row.status=='Closed'" class="badge bg-primary" style="color:white">{{row.status}}</span>
+          <span *ngIf="row.status=='Assigned'" class="badge bg-warning" style="color:white">{{row.status}}</span>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row (click)="onRowSelected(row)" *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <mat-paginator #paginator class="ticketPagination" [pageSize]="25" [pageSizeOptions]="[25, 50, 100]" [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+  <!-- <div class='row' style="margin-bottom:1000px;padding-bottom:500px">
+    <mat-paginator [length]="5" [pageSize]="3" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div> -->
+</div>
